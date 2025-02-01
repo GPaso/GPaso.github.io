@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Il Meraviglioso Mondo dei Delfini</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e6f3ff;
+            color: #333;
+        }
+        h1 {
+            color: #0066cc;
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #0099ff;
+            border-bottom: 3px solid #0099ff;
+            padding-bottom: 5px;
+        }
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .fun-fact {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #ffd700;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐬 Il Meraviglioso Mondo dei Delfini 🐬</h1>
+
+    <div class="section">
+        <h2>🌊 Habitat</h2>
+        <img src="/api/placeholder/400/200" alt="Delfini che nuotano nell'oceano">
+        <p>I delfini vivono negli oceani di tutto il mondo! Li possiamo trovare sia in acque calde che fredde. Alcuni delfini preferiscono vivere vicino alle coste, mentre altri amano il mare aperto.</p>
+        <div class="fun-fact">
+            <strong>Lo sapevi?</strong> Alcuni delfini possono nuotare fino a 40 km/h!
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🐟 Alimentazione</h2>
+        <img src="/api/placeholder/400/200" alt="Delfino che caccia pesci">
+        <p>I delfini sono carnivori molto intelligenti! Si nutrono principalmente di:</p>
+        <ul>
+            <li>Pesci</li>
+            <li>Calamari</li>
+            <li>Piccoli polpi</li>
+        </ul>
+        <div class="fun-fact">
+            <strong>Lo sapevi?</strong> Un delfino può mangiare fino a 10 kg di pesce al giorno!
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🤸 Comportamento</h2>
+        <img src="/api/placeholder/400/200" alt="Delfini che giocano">
+        <p>I delfini sono animali molto socievoli e giocherelloni! Vivono in gruppi chiamati "pod" e amano:</p>
+        <ul>
+            <li>Giocare con le onde</li>
+            <li>Saltare fuori dall'acqua</li>
+            <li>Comunicare tra loro con fischi e click</li>
+        </ul>
+        <div class="fun-fact">
+            <strong>Lo sapevi?</strong> I delfini dormono con metà cervello sveglio per poter respirare e stare attenti ai pericoli!
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>👶 Riproduzione</h2>
+        <img src="/api/placeholder/400/200" alt="Mamma delfino con il suo piccolo">
+        <p>I delfini sono mammiferi, proprio come noi! Questo significa che:</p>
+        <ul>
+            <li>Le mamme delfino partoriscono un piccolo alla volta</li>
+            <li>I piccoli bevono il latte della mamma</li>
+            <li>La mamma si prende cura del suo piccolo per 3-6 anni</li>
+        </ul>
+        <div class="fun-fact">
+            <strong>Lo sapevi?</strong> I piccoli di delfino nascono con la coda per prima, così possono subito nuotare!
+        </div>
+    </div>
+</body>
+</html>
