@@ -167,9 +167,122 @@
     text-transform:capitalize;
   }
   .date-line .he-year{
-    font-size:1rem;
+    font-family:'Fraunces', serif;
+    font-weight:560;
+    font-size:clamp(1.9rem, 8vw, 3rem);
     color:var(--ochre);
-    letter-spacing:0.02em;
+    letter-spacing:0.01em;
+    line-height:1;
+  }
+
+  .stat-row{
+    display:flex;
+    gap:0;
+  }
+  .stat-row .stat{
+    flex:1;
+    padding:16px 14px 16px 0;
+  }
+  .stat-row .stat + .stat{
+    padding-left:14px;
+    border-left:1px solid var(--line);
+  }
+  .stat .label{
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    color:var(--slate);
+    margin-bottom:6px;
+    text-transform:uppercase;
+  }
+  .stat .value{
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .stat .moon-emoji{ font-size:1.4rem; line-height:1; }
+
+  .compare-section{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    padding:20px 0 0;
+    border-top:1px solid var(--line);
+  }
+  .compare-col{
+    flex:1;
+    min-width:230px;
+    border-top:3px solid var(--ochre);
+    padding-top:12px;
+  }
+  .compare-col.ifc{ border-top-color:var(--moss); }
+  .compare-header{
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--slate);
+    margin-bottom:6px;
+  }
+  .compare-date{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.2rem;
+    line-height:1.4;
+    margin-bottom:14px;
+    min-height:2.8em;
+    white-space:pre-line;
+  }
+  .compare-col.greg .compare-date{ color:var(--clay); }
+  .compare-col.ifc .compare-date{ color:var(--moss); }
+  .mini-weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    margin-bottom:4px;
+  }
+  .mini-weekdays span{
+    font-size:0.62rem;
+    color:var(--slate);
+    text-align:center;
+  }
+  .mini-days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:2px;
+  }
+  .mini-day, .mini-special{
+    font-family:inherit;
+    background:none;
+    border:none;
+    color:var(--ink);
+    font-size:0.82rem;
+    padding:0;
+    cursor:pointer;
+    border-radius:50%;
+    aspect-ratio:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background 0.12s ease;
+  }
+  .mini-empty{ visibility:hidden; }
+  .mini-day:hover, .mini-special:hover{ background:var(--line); }
+  .mini-day:focus-visible, .mini-special:focus-visible{ outline:2px solid var(--clay); outline-offset:1px; }
+  .mini-day.is-today, .mini-special.is-today{ box-shadow: inset 0 0 0 1px var(--clay); }
+  .compare-col.greg .mini-day.selected{ background:var(--ochre); color:var(--stone); font-weight:600; }
+  .compare-col.ifc .mini-day.selected, .compare-col.ifc .mini-special.selected{ background:var(--moss); color:var(--stone); font-weight:600; }
+  .mini-special{
+    grid-column:1 / -1;
+    border-radius:10px;
+    font-size:0.74rem;
+    aspect-ratio:auto;
+    padding:6px 0;
+    background:var(--stone-dim);
+  }
+  .compare-caption{
+    font-size:0.76rem;
+    color:var(--slate);
+    margin:14px 0 6px;
+    line-height:1.55;
   }
 
   .rule{
@@ -276,6 +389,40 @@
   </div>
 
   <div class="card">
+    <div class="stat-row">
+      <div class="stat">
+        <div class="label">Settimana ISO</div>
+        <div class="value" id="weekValue"></div>
+      </div>
+      <div class="stat">
+        <div class="label">Fase lunare</div>
+        <div class="value"><span class="moon-emoji" id="moonEmoji"></span><span id="moonValue"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-section">
+    <div class="compare-col greg">
+      <div class="compare-header">Gregoriano</div>
+      <div class="compare-date" id="gregCompareDate"></div>
+      <div class="mini-weekdays"><span>LU</span><span>MA</span><span>ME</span><span>GI</span><span>VE</span><span>SA</span><span>DO</span></div>
+      <div class="mini-days" id="gregMiniCal"></div>
+    </div>
+    <div class="compare-col ifc">
+      <div class="compare-header">Fisso Internazionale (13x28)</div>
+      <div class="compare-date" id="ifcCompareDate"></div>
+      <div class="mini-weekdays"><span>DO</span><span>LU</span><span>MA</span><span>ME</span><span>GI</span><span>VE</span><span>SA</span></div>
+      <div class="mini-days" id="ifcMiniCal"></div>
+    </div>
+  </div>
+  <p class="compare-caption">
+    I due sistemi non iniziano la settimana nello stesso giorno (lunedi nel Gregoriano, domenica nella proposta
+    Cotsworth/Eastman) e dopo il primo mese le date non coincidono piu: ogni mese fisso dura esattamente
+    4 settimane, con un giorno fuori settimana a fine anno (e uno a meta anno negli anni bisestili).
+    Clicca un giorno in una delle due griglie per saltarci.
+  </p>
+
+  <div class="card">
     <div class="label" id="monthPhraseLabel">Curiosita del mese</div>
     <p class="phrase" id="monthPhrase"></p>
   </div>
@@ -354,7 +501,132 @@
     return feasts;
   }
 
+  function isoWeekNumber(date){
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dayNum = (d.getUTCDay() + 6) % 7; // Monday=0 .. Sunday=6
+    d.setUTCDate(d.getUTCDate() - dayNum + 3); // nearest Thursday
+    const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+    const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
+    firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
+    const week = 1 + Math.round((d - firstThursday) / (7*86400000));
+    return { week, year: d.getUTCFullYear() };
+  }
+
+  function moonPhaseInfo(date){
+    const synodic = 29.530588853;
+    const knownNewMoon = Date.UTC(2000,0,6,18,14,0);
+    const diffDays = (date.getTime() - knownNewMoon) / 86400000;
+    let phase = (diffDays % synodic) / synodic;
+    if (phase < 0) phase += 1;
+    const illumination = Math.round((1 - Math.cos(2*Math.PI*phase))/2 * 100);
+    let name, emoji;
+    if (phase < 0.03 || phase > 0.97){ name = "Luna nuova"; emoji = "🌑"; }
+    else if (phase < 0.22){ name = "Luna crescente"; emoji = "🌒"; }
+    else if (phase < 0.28){ name = "Primo quarto"; emoji = "🌓"; }
+    else if (phase < 0.47){ name = "Gibbosa crescente"; emoji = "🌔"; }
+    else if (phase < 0.53){ name = "Luna piena"; emoji = "🌕"; }
+    else if (phase < 0.72){ name = "Gibbosa calante"; emoji = "🌖"; }
+    else if (phase < 0.78){ name = "Ultimo quarto"; emoji = "🌗"; }
+    else { name = "Luna calante"; emoji = "🌘"; }
+    return { name, emoji, illumination };
+  }
+
+  const IFC_MONTHS = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Sol","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+  const IFC_WEEKDAYS = ["domenica","lunedi","martedi","mercoledi","giovedi","venerdi","sabato"];
+
+  function ifcDate(date){
+    const year = date.getFullYear();
+    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
+    const startOfYear = new Date(year,0,1);
+    const doy = Math.floor((date - startOfYear)/86400000)+1;
+
+    if (!isLeap && doy === 365) return { special: "Giorno dell'Anno" };
+    if (isLeap && doy === 366) return { special: "Giorno dell'Anno" };
+    if (isLeap && doy === 169) return { special: "Giorno Bisestile" };
+
+    let idx = doy;
+    if (isLeap && doy > 169) idx = doy - 1;
+
+    const monthIdx = Math.floor((idx-1)/28);
+    const day = ((idx-1)%28)+1;
+    const week = Math.floor((day-1)/7)+1;
+    const weekday = IFC_WEEKDAYS[(day-1)%7];
+    return { month: IFC_MONTHS[monthIdx], day, week, weekday };
+  }
+
+  function ifcToDate(year, monthIdx, day){
+    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
+    const idx = monthIdx*28 + day;
+    const doy = (isLeap && idx > 168) ? idx + 1 : idx;
+    const d = new Date(year,0,1);
+    d.setDate(d.getDate() + doy - 1);
+    return d;
+  }
+
+  function ifcSpecialDate(year, special){
+    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
+    const d = new Date(year,0,1);
+    if (special === 'leap') d.setDate(d.getDate() + 168);
+    else d.setDate(d.getDate() + (isLeap ? 365 : 364));
+    return d;
+  }
+
   let viewedDate = new Date();
+
+  function buildGregMiniCal(container, year, monthIdx, viewed, realToday){
+    const daysInMonth = new Date(year, monthIdx+1, 0).getDate();
+    const startOffset = (new Date(year, monthIdx, 1).getDay() + 6) % 7;
+    let html = '';
+    for (let i = 0; i < startOffset; i++) html += '<span class="mini-empty"></span>';
+    for (let d = 1; d <= daysInMonth; d++){
+      const bd = new Date(year, monthIdx, d);
+      const cls = ['mini-day'];
+      if (sameDate(bd, viewed)) cls.push('selected');
+      if (sameDate(bd, realToday)) cls.push('is-today');
+      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="greg" data-y="'+year+'" data-m="'+monthIdx+'" data-d="'+d+'">'+d+'</button>';
+    }
+    container.innerHTML = html;
+  }
+
+  function buildIfcMiniCal(container, year, monthIdx, viewed, realToday){
+    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
+    const iv = ifcDate(viewed), it = ifcDate(realToday);
+    let html = '';
+    for (let d = 1; d <= 28; d++){
+      const cls = ['mini-day'];
+      if (!iv.special && iv.month === IFC_MONTHS[monthIdx] && iv.day === d && viewed.getFullYear() === year) cls.push('selected');
+      if (!it.special && it.month === IFC_MONTHS[monthIdx] && it.day === d && realToday.getFullYear() === year) cls.push('is-today');
+      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="ifc" data-y="'+year+'" data-m="'+monthIdx+'" data-d="'+d+'">'+d+'</button>';
+    }
+    if (monthIdx === 5 && isLeap){
+      const cls = ['mini-special'];
+      if (iv.special === "Giorno Bisestile" && viewed.getFullYear() === year) cls.push('selected');
+      if (it.special === "Giorno Bisestile" && realToday.getFullYear() === year) cls.push('is-today');
+      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="ifc-special" data-special="leap" data-y="'+year+'">Giorno Bisestile</button>';
+    }
+    if (monthIdx === 12){
+      const cls = ['mini-special'];
+      if (iv.special === "Giorno dell'Anno" && viewed.getFullYear() === year) cls.push('selected');
+      if (it.special === "Giorno dell'Anno" && realToday.getFullYear() === year) cls.push('is-today');
+      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="ifc-special" data-special="year" data-y="'+year+'">Giorno dell\'Anno</button>';
+    }
+    container.innerHTML = html;
+  }
+
+  document.getElementById('gregMiniCal').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-kind="greg"]');
+    if (!btn) return;
+    viewedDate = new Date(+btn.dataset.y, +btn.dataset.m, +btn.dataset.d);
+    render();
+  });
+
+  document.getElementById('ifcMiniCal').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-kind]');
+    if (!btn) return;
+    if (btn.dataset.kind === 'ifc') viewedDate = ifcToDate(+btn.dataset.y, +btn.dataset.m, +btn.dataset.d);
+    else viewedDate = ifcSpecialDate(+btn.dataset.y, btn.dataset.special);
+    render();
+  });
 
   function startOfDay(d){
     const c = new Date(d);
@@ -378,6 +650,32 @@
 
     const todayBtn = document.getElementById('todayBtn');
     todayBtn.classList.toggle('visible', !sameDate(now, realToday));
+
+    const iso = isoWeekNumber(now);
+    document.getElementById('weekValue').textContent = "n. " + iso.week;
+
+    const moon = moonPhaseInfo(now);
+    document.getElementById('moonEmoji').textContent = moon.emoji;
+    document.getElementById('moonValue').textContent = moon.name + " (" + moon.illumination + "%)";
+
+    const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+    document.getElementById('gregCompareDate').textContent =
+      cap(WEEKDAY_NAMES[now.getDay()]) + " " + day + " " + DATA.MONTH_NAMES[month-1] + "\n" +
+      "settimana ISO " + iso.week;
+
+    const ifc = ifcDate(now);
+    let ifcMonthIdx;
+    if (ifc.special){
+      ifcMonthIdx = (ifc.special === "Giorno Bisestile") ? 5 : 12;
+      document.getElementById('ifcCompareDate').textContent = ifc.special + "\nfuori settimana";
+    } else {
+      ifcMonthIdx = IFC_MONTHS.indexOf(ifc.month);
+      document.getElementById('ifcCompareDate').textContent =
+        ifc.month + " " + ifc.day + "\n" + ifc.weekday + ", settimana " + ifc.week + " di 4";
+    }
+
+    buildGregMiniCal(document.getElementById('gregMiniCal'), year, month-1, now, realToday);
+    buildIfcMiniCal(document.getElementById('ifcMiniCal'), year, ifcMonthIdx, now, realToday);
 
     // resolve special day: national > local > christian fixed > christian moveable > pagan
     let specialText = null, specialCategory = null;
