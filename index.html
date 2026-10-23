@@ -44,7 +44,8 @@
     --line: rgba(233,227,209,0.14);
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;height:100%;}
+  html,body{margin:0;padding:0;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
   body{
     background:var(--stone);
     color:var(--ink);
@@ -57,36 +58,15 @@
   }
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
 
-  #app{
-    max-width:600px;
-    margin:0 auto;
-    padding:40px 26px 60px;
-  }
+  #app{ max-width:600px; margin:0 auto; padding:40px 26px 70px; }
 
-  .topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:26px;
-  }
-  .eyebrow{
-    font-size:0.8rem;
-    color:var(--slate);
-    letter-spacing:0.02em;
-  }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; }
+  .eyebrow{ font-size:0.8rem; color:var(--slate); letter-spacing:0.02em; margin:0; }
 
   .theme-toggle{
-    width:34px; height:34px;
-    border:1px solid var(--line);
-    background:none;
-    border-radius:50%;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--ink);
-    flex-shrink:0;
-    transition:border-color 0.15s ease;
+    width:34px; height:34px; border:1px solid var(--line); background:none; border-radius:50%;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--ink);
+    flex-shrink:0; transition:border-color 0.15s ease;
   }
   .theme-toggle:hover{ border-color:var(--ink); }
   .theme-toggle:focus-visible{ outline:2px solid var(--clay); outline-offset:2px; }
@@ -100,169 +80,132 @@
     :root:not([data-theme="light"]) .theme-toggle .icon-moon{ display:none; }
   }
 
-  .day-nav{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:6px;
-  }
+  .day-nav{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
   .nav-btn{
-    width:34px; height:34px;
-    border:1px solid var(--line);
-    background:none;
-    color:var(--ink);
-    border-radius:2px;
-    cursor:pointer;
-    font-size:1rem;
-    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border:1px solid var(--line); background:none; color:var(--ink);
+    border-radius:2px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
     transition:border-color 0.15s ease;
   }
   .nav-btn:hover{ border-color:var(--ink); }
   .nav-btn:focus-visible{ outline:2px solid var(--clay); outline-offset:2px; }
   .today-btn{
-    border:none;
-    background:none;
-    color:var(--clay);
-    font-size:0.85rem;
-    cursor:pointer;
-    padding:0 2px;
-    text-decoration:underline;
-    text-underline-offset:3px;
-    text-decoration-color:var(--line);
+    border:none; background:none; color:var(--clay); font-family:inherit; font-size:0.85rem; cursor:pointer;
+    padding:0 2px; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line);
     visibility:hidden;
   }
   .today-btn.visible{ visibility:visible; }
   .today-btn:focus-visible{ outline:2px solid var(--clay); outline-offset:2px; }
 
-  .weekday{
-    font-size:1.05rem;
-    color:var(--clay);
-    text-transform:capitalize;
-    margin:0 0 4px;
-  }
-
-  .date-line{
-    display:flex;
-    align-items:baseline;
-    gap:16px;
-    flex-wrap:wrap;
-  }
+  .weekday{ font-size:1.05rem; color:var(--clay); text-transform:capitalize; margin:0 0 4px; }
+  .date-line{ display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; }
   .date-line .day{
-    font-family:'Fraunces', serif;
-    font-optical-sizing:auto;
-    font-weight:440;
-    font-size:clamp(4.4rem, 22vw, 7rem);
-    line-height:0.9;
-    margin:0;
+    font-family:'Fraunces', serif; font-optical-sizing:auto; font-weight:440;
+    font-size:clamp(4.4rem, 22vw, 7rem); line-height:0.9; margin:0;
   }
-  .date-line .month-year{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
+  .date-line .month-year{ display:flex; flex-direction:column; gap:4px; }
   .date-line .month{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:clamp(1.5rem, 6vw, 2.1rem);
-    text-transform:capitalize;
+    font-family:'Fraunces', serif; font-weight:500; font-size:clamp(1.5rem, 6vw, 2.1rem); text-transform:capitalize;
   }
   .date-line .he-year{
-    font-family:'Fraunces', serif;
-    font-weight:560;
-    font-size:clamp(1.9rem, 8vw, 3rem);
-    color:var(--ochre);
-    letter-spacing:0.01em;
-    line-height:1;
+    font-family:'Fraunces', serif; font-weight:560; font-size:clamp(1.9rem, 8vw, 3rem);
+    color:var(--ochre); letter-spacing:0.01em; line-height:1;
   }
 
-  .stat-row{
-    display:flex;
-    gap:0;
+  .rule{ width:56px; height:2px; background:var(--ochre); border:none; margin:26px 0 24px; }
+
+  .card{ border-top:1px solid var(--line); padding:16px 0; }
+  .card .label, .label{
+    font-size:0.72rem; letter-spacing:0.04em; color:var(--slate); margin-bottom:6px; text-transform:uppercase;
   }
-  .stat-row .stat{
-    flex:1;
-    padding:16px 14px 16px 0;
+  .card .value{ font-size:1.05rem; line-height:1.5; }
+  .card.holiday .value{ color:var(--ochre); font-weight:600; }
+  .card.christian .value{ color:var(--moss); font-weight:600; }
+  .card.pagan .value{ color:var(--violet); font-weight:600; }
+
+  .phrase{ font-family:'Fraunces', serif; font-style:italic; font-size:1.15rem; line-height:1.55; margin:0; }
+
+  /* notes */
+  .label-row{ display:flex; justify-content:space-between; align-items:baseline; }
+  .note-count{ font-size:0.72rem; color:var(--slate); }
+  #noteInput{
+    width:100%; font-family:inherit; font-size:1rem; line-height:1.5; color:var(--ink);
+    background:transparent; border:1px solid var(--line); border-radius:2px; padding:10px 12px;
+    resize:vertical; min-height:92px; margin-top:4px;
   }
-  .stat-row .stat + .stat{
-    padding-left:14px;
-    border-left:1px solid var(--line);
-  }
-  .stat .label{
-    font-size:0.72rem;
-    letter-spacing:0.04em;
-    color:var(--slate);
-    margin-bottom:6px;
-    text-transform:uppercase;
-  }
-  .stat .value{
-    font-size:1.15rem;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
+  #noteInput:focus{ outline:2px solid var(--ochre); outline-offset:0; border-color:transparent; }
+  .note-status{ font-size:0.74rem; color:var(--slate); margin-top:8px; line-height:1.5; }
+  .note-status.error{ color:var(--clay); }
+
+  /* stat row */
+  .stat-row{ display:flex; gap:0; }
+  .stat-row .stat{ flex:1; padding:0 14px 0 0; }
+  .stat-row .stat + .stat{ padding-left:14px; border-left:1px solid var(--line); }
+  .stat .value{ font-size:1.15rem; display:flex; align-items:center; gap:8px; }
   .stat .moon-emoji{ font-size:1.4rem; line-height:1; }
 
-  .compare-section{
-    display:flex;
-    gap:28px;
-    flex-wrap:wrap;
-    padding:20px 0 0;
-    border-top:1px solid var(--line);
+  /* daylight */
+  .sun-times{ display:flex; gap:22px; flex-wrap:wrap; font-size:1.05rem; }
+  .sun-times b{ font-weight:600; color:var(--ochre); }
+  .sun-track{ position:relative; width:100%; height:6px; background:var(--stone-dim); margin:12px 0 8px; border-radius:3px; overflow:hidden; }
+  .sun-fill{ position:absolute; top:0; bottom:0; background:var(--ochre); }
+  .sun-caption{ font-size:0.82rem; color:var(--slate); line-height:1.5; }
+
+  /* deep time */
+  .ev{ margin-bottom:12px; }
+  .ev:last-child{ margin-bottom:0; }
+  .ev-meta{ font-size:0.78rem; color:var(--ochre); letter-spacing:0.01em; }
+  .ev-text{ font-size:1rem; line-height:1.5; margin-top:2px; }
+  .deep-note{ font-size:0.8rem; color:var(--slate); margin:0 0 10px; line-height:1.5; }
+
+  /* year strip */
+  .strip-section{ border-top:1px solid var(--line); padding-top:18px; margin-bottom:6px; }
+  .strip-head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .strip-head .caption{ font-size:0.78rem; color:var(--slate); }
+  .blocks{ display:flex; width:100%; height:20px; gap:1px; }
+  .blk{
+    flex:1 1 0; min-width:2px; background:var(--stone-dim); color:var(--slate); border:none; padding:0;
+    cursor:pointer; font-family:inherit; font-size:0.6rem; line-height:20px; text-align:center;
+    overflow:hidden; white-space:nowrap;
   }
-  .compare-col{
-    flex:1;
-    min-width:230px;
-    border-top:3px solid var(--ochre);
-    padding-top:12px;
+  .blk.cur{ background:var(--ochre); color:var(--stone); font-weight:600; }
+  .blocks.ifc .blk.cur{ background:var(--moss); }
+  .blk.extra{ background:var(--clay); }
+  .blk:focus-visible{ outline:2px solid var(--clay); outline-offset:1px; }
+  .strip-wrap{ position:relative; margin:5px 0; }
+  .strip{
+    display:grid; height:30px; cursor:pointer; touch-action:pan-y; user-select:none; -webkit-user-select:none;
   }
+  .sc{ background:var(--stone-dim); }
+  .sc.nat{ background:var(--ochre); }
+  .sc.chr{ background:var(--moss); }
+  .sc.pag{ background:var(--violet); }
+  .marker-sel{ position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ink); transform:translateX(-1px); pointer-events:none; }
+  .marker-today{
+    position:absolute; bottom:-9px; width:0; height:0; border-left:4px solid transparent;
+    border-right:4px solid transparent; border-bottom:6px solid var(--clay); transform:translateX(-4px); pointer-events:none;
+  }
+  .strip-names{ display:flex; justify-content:space-between; font-size:0.62rem; color:var(--slate); margin:2px 0 4px; }
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:0.72rem; color:var(--slate); margin-top:14px; }
+  .legend i{ display:inline-block; width:9px; height:9px; margin-right:5px; vertical-align:-1px; }
+
+  /* comparison */
+  .compare-section{ display:flex; gap:28px; flex-wrap:wrap; padding:20px 0 0; border-top:1px solid var(--line); margin-top:22px; }
+  .compare-col{ flex:1; min-width:230px; border-top:3px solid var(--ochre); padding-top:12px; }
   .compare-col.ifc{ border-top-color:var(--moss); }
-  .compare-header{
-    font-size:0.72rem;
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-    color:var(--slate);
-    margin-bottom:6px;
-  }
+  .compare-header{ font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--slate); margin-bottom:6px; }
   .compare-date{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:1.2rem;
-    line-height:1.4;
-    margin-bottom:14px;
-    min-height:2.8em;
-    white-space:pre-line;
+    font-family:'Fraunces', serif; font-weight:500; font-size:1.2rem; line-height:1.4; margin-bottom:14px;
+    min-height:2.8em; white-space:pre-line;
   }
   .compare-col.greg .compare-date{ color:var(--clay); }
   .compare-col.ifc .compare-date{ color:var(--moss); }
-  .mini-weekdays{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    margin-bottom:4px;
-  }
-  .mini-weekdays span{
-    font-size:0.62rem;
-    color:var(--slate);
-    text-align:center;
-  }
-  .mini-days{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:2px;
-  }
+  .mini-weekdays{ display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:4px; }
+  .mini-weekdays span{ font-size:0.62rem; color:var(--slate); text-align:center; }
+  .mini-days{ display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
   .mini-day, .mini-special{
-    font-family:inherit;
-    background:none;
-    border:none;
-    color:var(--ink);
-    font-size:0.82rem;
-    padding:0;
-    cursor:pointer;
-    border-radius:50%;
-    aspect-ratio:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:background 0.12s ease;
+    position:relative; font-family:inherit; background:none; border:none; color:var(--ink); font-size:0.82rem;
+    padding:0; cursor:pointer; border-radius:50%; aspect-ratio:1; display:flex; align-items:center;
+    justify-content:center; transition:background 0.12s ease;
   }
   .mini-empty{ visibility:hidden; }
   .mini-day:hover, .mini-special:hover{ background:var(--line); }
@@ -270,85 +213,31 @@
   .mini-day.is-today, .mini-special.is-today{ box-shadow: inset 0 0 0 1px var(--clay); }
   .compare-col.greg .mini-day.selected{ background:var(--ochre); color:var(--stone); font-weight:600; }
   .compare-col.ifc .mini-day.selected, .compare-col.ifc .mini-special.selected{ background:var(--moss); color:var(--stone); font-weight:600; }
-  .mini-special{
-    grid-column:1 / -1;
-    border-radius:10px;
-    font-size:0.74rem;
-    aspect-ratio:auto;
-    padding:6px 0;
-    background:var(--stone-dim);
+  .mini-day.has-note::after, .mini-special.has-note::after{
+    content:""; position:absolute; bottom:3px; left:50%; width:4px; height:4px; margin-left:-2px;
+    border-radius:50%; background:var(--clay);
   }
-  .compare-caption{
-    font-size:0.76rem;
-    color:var(--slate);
-    margin:14px 0 6px;
-    line-height:1.55;
-  }
+  .mini-day.selected.has-note::after, .mini-special.selected.has-note::after{ background:var(--stone); }
+  .mini-special{ grid-column:1 / -1; border-radius:10px; font-size:0.74rem; aspect-ratio:auto; padding:6px 0; background:var(--stone-dim); }
+  .compare-caption{ font-size:0.76rem; color:var(--slate); margin:14px 0 6px; line-height:1.55; }
 
-  .rule{
-    width:56px; height:2px;
-    background:var(--ochre);
-    border:none;
-    margin:26px 0 24px;
-  }
+  /* other calendars */
+  .section-title{ font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--slate); margin:30px 0 10px; padding-top:18px; border-top:1px solid var(--line); }
+  .other-cals{ display:flex; flex-wrap:wrap; gap:18px; }
+  .oc{ flex:1 1 170px; border-top:3px solid var(--clay); padding-top:10px; }
+  .oc.pos{ border-top-color:var(--violet); }
+  .oc.jdn{ border-top-color:var(--slate); }
+  .oc .oc-name{ font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--slate); margin-bottom:4px; }
+  .oc .oc-main{ font-family:'Fraunces', serif; font-weight:500; font-size:1.25rem; line-height:1.3; }
+  .oc.rep .oc-main{ color:var(--clay); }
+  .oc.pos .oc-main{ color:var(--violet); }
+  .oc.jdn .oc-main{ color:var(--ink); }
+  .oc .oc-sub{ font-size:0.85rem; color:var(--slate); line-height:1.5; margin-top:4px; }
+  .oc-caption{ font-size:0.76rem; color:var(--slate); margin:14px 0 0; line-height:1.55; }
 
-  .card{
-    border-top:1px solid var(--line);
-    padding:16px 0;
-  }
-  .card .label{
-    font-size:0.72rem;
-    letter-spacing:0.04em;
-    color:var(--slate);
-    margin-bottom:6px;
-    text-transform:uppercase;
-  }
-  .card .value{
-    font-size:1.05rem;
-    line-height:1.5;
-  }
-  .card.holiday .value{ color:var(--ochre); font-weight:600; }
-  .card.christian .value{ color:var(--moss); font-weight:600; }
-  .card.pagan .value{ color:var(--violet); font-weight:600; }
+  .footer-note{ margin-top:36px; font-size:0.78rem; color:var(--slate); line-height:1.6; }
 
-  .phrase{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:1.15rem;
-    line-height:1.55;
-    color:var(--ink);
-  }
-
-  .progress-wrap{
-    margin-top:6px;
-  }
-  .progress-track{
-    width:100%;
-    height:3px;
-    background:var(--stone-dim);
-    position:relative;
-    overflow:hidden;
-  }
-  .progress-fill{
-    position:absolute; left:0; top:0; height:100%;
-    background:var(--ochre);
-  }
-  .progress-caption{
-    font-size:0.78rem;
-    color:var(--slate);
-    margin-top:8px;
-  }
-
-  .footer-note{
-    margin-top:36px;
-    font-size:0.78rem;
-    color:var(--slate);
-    line-height:1.6;
-  }
-
-  @media (max-width:380px){
-    #app{ padding:30px 18px 48px; }
-  }
+  @media (max-width:380px){ #app{ padding:30px 18px 56px; } }
 </style>
 </head>
 <body>
@@ -389,6 +278,15 @@
   </div>
 
   <div class="card">
+    <div class="label-row">
+      <div class="label">Note del giorno</div>
+      <div class="note-count" id="noteCount"></div>
+    </div>
+    <textarea id="noteInput" rows="4" maxlength="500" placeholder="Scrivi qualcosa su questo giorno…" aria-label="Note del giorno"></textarea>
+    <div class="note-status" id="noteStatus"></div>
+  </div>
+
+  <div class="card">
     <div class="stat-row">
       <div class="stat">
         <div class="label">Settimana ISO</div>
@@ -401,6 +299,49 @@
     </div>
   </div>
 
+  <div class="card">
+    <div class="label">Luce a Milano</div>
+    <div class="sun-times">
+      <span>Alba <b id="sunrise"></b></span>
+      <span>Tramonto <b id="sunset"></b></span>
+      <span>Durata <b id="dayLength"></b></span>
+    </div>
+    <div class="sun-track" aria-hidden="true"><div class="sun-fill" id="sunFill"></div></div>
+    <div class="sun-caption" id="sunCaption"></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Questo giorno nel tempo profondo</div>
+    <p class="deep-note" id="deepNote" style="display:none;"></p>
+    <div id="deepList"></div>
+  </div>
+
+  <div class="card">
+    <div class="label" id="monthPhraseLabel">Curiosità del mese</div>
+    <p class="phrase" id="monthPhrase"></p>
+  </div>
+
+  <section class="strip-section">
+    <div class="strip-head">
+      <div class="label" style="margin:0;">L’anno a colpo d’occhio</div>
+      <div class="caption" id="stripCaption"></div>
+    </div>
+    <div class="blocks greg" id="blocksGreg" aria-label="Mesi gregoriani"></div>
+    <div class="strip-wrap">
+      <div class="strip" id="strip" role="img" aria-label="Tutti i giorni dell’anno: clicca o trascina per saltare a un giorno"></div>
+      <div class="marker-sel" id="markerSel"></div>
+      <div class="marker-today" id="markerToday"></div>
+    </div>
+    <div class="blocks ifc" id="blocksIfc" aria-label="Mesi del calendario fisso" style="margin-top:12px;"></div>
+    <div class="strip-names"><span>sopra: mesi gregoriani</span><span>sotto: 13 mesi fissi (Sol = il tredicesimo)</span></div>
+    <div class="legend">
+      <span><i style="background:var(--ochre)"></i>festa nazionale</span>
+      <span><i style="background:var(--moss)"></i>ricorrenza cristiana</span>
+      <span><i style="background:var(--violet)"></i>festa pagana</span>
+      <span><i style="background:var(--clay)"></i>giorno fuori mese</span>
+    </div>
+  </section>
+
   <div class="compare-section">
     <div class="compare-col greg">
       <div class="compare-header">Gregoriano</div>
@@ -409,116 +350,146 @@
       <div class="mini-days" id="gregMiniCal"></div>
     </div>
     <div class="compare-col ifc">
-      <div class="compare-header">Fisso Internazionale (13x28)</div>
+      <div class="compare-header">Fisso Internazionale (13×28)</div>
       <div class="compare-date" id="ifcCompareDate"></div>
       <div class="mini-weekdays"><span>DO</span><span>LU</span><span>MA</span><span>ME</span><span>GI</span><span>VE</span><span>SA</span></div>
       <div class="mini-days" id="ifcMiniCal"></div>
     </div>
   </div>
   <p class="compare-caption">
-    I due sistemi non iniziano la settimana nello stesso giorno (lunedi nel Gregoriano, domenica nella proposta
-    Cotsworth/Eastman) e dopo il primo mese le date non coincidono piu: ogni mese fisso dura esattamente
-    4 settimane, con un giorno fuori settimana a fine anno (e uno a meta anno negli anni bisestili).
-    Clicca un giorno in una delle due griglie per saltarci.
+    I due sistemi non iniziano la settimana nello stesso giorno (lunedì nel gregoriano, domenica nella proposta
+    Cotsworth/Eastman) e dopo il primo mese le date non coincidono più: ogni mese fisso dura esattamente
+    4 settimane, con un giorno fuori settimana a fine anno (e uno a metà anno negli anni bisestili).
+    Clicca un giorno in una delle due griglie per saltarci. Il puntino indica che quel giorno ha una nota.
   </p>
 
-  <div class="card">
-    <div class="label" id="monthPhraseLabel">Curiosita del mese</div>
-    <p class="phrase" id="monthPhrase"></p>
-  </div>
-
-  <div class="card">
-    <div class="label">Posizione nell'anno</div>
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" id="yearProgress"></div></div>
-      <div class="progress-caption" id="yearCaption"></div>
+  <div class="section-title">Altri calendari</div>
+  <div class="other-cals">
+    <div class="oc rep">
+      <div class="oc-name">Repubblicano francese</div>
+      <div class="oc-main" id="repMain"></div>
+      <div class="oc-sub" id="repSub"></div>
+    </div>
+    <div class="oc pos">
+      <div class="oc-name">Positivista (Comte)</div>
+      <div class="oc-main" id="posMain"></div>
+      <div class="oc-sub" id="posSub"></div>
+    </div>
+    <div class="oc jdn">
+      <div class="oc-name">Giorno giuliano</div>
+      <div class="oc-main" id="jdnMain"></div>
+      <div class="oc-sub" id="jdnSub"></div>
     </div>
   </div>
+  <p class="oc-caption">
+    Il calendario repubblicano fu in uso ufficiale dal 1793 al 1805: qui è esteso con la regola originale
+    (l’anno inizia a Parigi nel giorno dell’equinozio d’autunno). Il positivista di Auguste Comte (1849) ha 13 mesi di
+    28 giorni intitolati a grandi figure della storia ed è l’antenato del calendario fisso internazionale.
+    Il giorno giuliano (JDN) numera i giorni in modo continuo dal 4713 a.C., senza mesi né anni.
+  </p>
 
   <p class="footer-note">
-    Il calendario olocenico somma 10.000 anni all'anno corrente, contando dall'incirca l'inizio
-    dell'agricoltura e degli insediamenti stabili. Festivita nazionali e cristiane mobili sono
-    calcolate per l'anno in corso; le festivita pagane e i santi seguono la tradizione popolare italiana.
+    Il calendario olocenico somma 10.000 anni all’anno corrente, contando dall’incirca l’inizio dell’agricoltura e degli
+    insediamenti stabili. Le festività nazionali e cristiane mobili sono calcolate per l’anno visualizzato; le festività pagane
+    e i santi seguono la tradizione popolare italiana. La rubrica sul tempo profondo è una selezione curata, non un elenco completo:
+    per molti eventi antichi la data è tradizionale o calcolata, e per alcuni giorni non c’è nessun evento schedato (in quel caso
+    viene mostrato il più vicino). Alba e tramonto sono un calcolo astronomico approssimato (circa ±2 minuti).
   </p>
 </div>
 
 <script>
-  const DATA = {"MONTH_NAMES": ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"], "HUMAN_ERA_PHRASES": ["~10.000 a.C. - inizia l'agricoltura nella Mezzaluna Fertile: comincia il conteggio olocenico.", "~7500 a.C. - a Catalhoyuk, in Anatolia, sorge una delle prime proto-citta.", "~3500 a.C. - in Mesopotamia compare la ruota.", "~3200 a.C. - a Uruk nasce la scrittura cuneiforme, la prima scrittura conosciuta.", "~3100 a.C. - Alto e Basso Egitto vengono unificati sotto un'unica corona.", "~2560 a.C. - viene completata la Grande Piramide di Giza (data indicativa).", "~1200 a.C. - crolla il mondo del Bronzo; inizia l'Eta del Ferro.", "753 a.C. - data tradizionale della fondazione di Roma.", "~105 d.C. - in Cina, sotto la dinastia Han, si perfeziona la carta.", "1088 d.C. - nasce l'Universita di Bologna, la piu antica al mondo.", "1440 d.C. - la stampa a caratteri mobili di Gutenberg inizia a diffondersi.", "20 luglio 1969 d.C. - l'essere umano lascia le prime impronte sulla Luna."], "NATIONAL": {"1-1": "Capodanno", "1-6": "Epifania", "3-28": "Pasqua", "3-29": "Pasquetta", "4-25": "Festa della Liberazione", "5-1": "Festa dei Lavoratori", "6-2": "Festa della Repubblica", "8-15": "Ferragosto - Assunzione", "11-1": "Ognissanti", "12-8": "Immacolata Concezione", "12-25": "Natale", "12-26": "Santo Stefano"}, "LOCAL": {"12-7": "Sant'Ambrogio - festa patronale di Milano"}, "CHRISTIAN_FIXED": {"2-2": "Presentazione del Signore (Candelora)"}, "PAGAN": {"2-2": "Imbolc", "3-20": "Ostara - equinozio di primavera", "4-30": "Beltane (vigilia)", "6-21": "Litha - solstizio d'estate", "8-1": "Lughnasadh", "9-22": "Mabon - equinozio d'autunno", "10-31": "Samhain", "12-21": "Yule - solstizio d'inverno"}, "SAINTS": {"1-1": "Maria SS. Madre di Dio", "1-2": "San Basilio Magno", "1-3": "SS. Nome di Gesu", "1-4": "Sant'Ermete", "1-5": "Santa Amelia", "1-6": "Epifania del Signore", "1-7": "San Luciano", "1-8": "San Massimo", "1-9": "San Giuliano", "1-10": "San Aldo", "1-11": "San Igino", "1-12": "San Modesto", "1-13": "Sant'Ilario", "1-14": "San Felice", "1-15": "San Mauro", "1-16": "San Marcello", "1-17": "Sant'Antonio Abate", "1-18": "Santa Liberata", "1-19": "San Mario", "1-20": "San Sebastiano", "1-21": "Sant'Agnese", "1-22": "San Vincenzo", "1-23": "Sant'Emerenziana", "1-24": "San Francesco di Sales", "1-25": "Conversione di San Paolo", "1-26": "SS. Tito e Timoteo", "1-27": "Sant'Angela Merici", "1-28": "San Tommaso d'Aquino", "1-29": "San Costanzo", "1-30": "Santa Martina", "1-31": "San Giovanni Bosco", "2-1": "San Severo", "2-3": "San Biagio", "2-4": "Sant'Andrea Corsini", "2-5": "Sant'Agata", "2-6": "San Paolo Miki", "2-7": "San Riccardo", "2-8": "Santa Giuseppina Bakhita", "2-9": "Sant'Apollonia", "2-10": "Santa Scolastica", "2-11": "N.S. di Lourdes", "2-12": "Sant'Eulalia", "2-13": "Santa Maura", "2-14": "San Valentino", "2-15": "San Faustino", "2-16": "Santa Giuliana", "2-17": "Sette Santi Fondatori", "2-18": "San Simeone", "2-19": "San Corrado", "2-20": "Sant'Eleuterio", "2-21": "San Pier Damiani", "2-22": "Cattedra di San Pietro", "2-23": "San Policarpo", "2-24": "San Sergio", "2-25": "San Cesario", "2-26": "San Nestore", "2-27": "San Gabriele dell'Addolorata", "2-28": "San Romano", "3-1": "Sant'Albino", "3-2": "San Quinto", "3-3": "Santa Cunegonda", "3-4": "San Casimiro", "3-5": "Sant'Adriano", "3-6": "San Fridolino", "3-7": "Sante Perpetua e Felicita", "3-8": "San Giovanni di Dio", "3-9": "Santa Francesca Romana", "3-10": "San Simplicio", "3-11": "San Costantino", "3-12": "San Massimiliano", "3-13": "Santa Cristina", "3-14": "Santa Matilde", "3-15": "Santa Luisa de Marillac", "3-16": "Sant'Eriberto", "3-17": "San Patrizio", "3-18": "San Cirillo di Gerusalemme", "3-19": "San Giuseppe", "3-20": "San Giovanni Nepomuceno", "3-22": "San Lea", "3-23": "San Turibio de Mogrovejo", "3-24": "San Romolo", "3-30": "San Amedeo", "3-31": "San Beniamino", "4-1": "Sant'Ugo", "4-2": "San Francesco da Paola", "4-3": "San Riccardo", "4-4": "Sant'Isidoro di Siviglia", "4-6": "San Guglielmo", "4-7": "San Giovanni Battista de La Salle", "4-8": "San Dionigi", "4-9": "San Demetrio", "4-10": "San Terenzio", "4-11": "Santo Stanislao", "4-12": "Santa Giulia", "4-13": "Sant'Ermenegildo", "4-14": "Santa Liduina", "4-15": "San Damaso", "4-16": "Santa Bernadette", "4-17": "Sant'Aniceto", "4-18": "San Galdino", "4-19": "San Leone IX", "4-20": "Sant'Agnese da Montepulciano", "4-21": "Sant'Anselmo d'Aosta", "4-22": "San Leonida", "4-23": "San Giorgio", "4-24": "San Fedele da Sigmaringen", "4-25": "San Marco Evangelista", "4-26": "Santa Alda", "4-27": "Santa Zita", "4-28": "San Pietro Chanel", "4-29": "Santa Caterina da Siena", "4-30": "San Pio V", "5-2": "Sant'Atanasio", "5-3": "Santi Filippo e Giacomo", "5-4": "San Floriano", "5-5": "San Silvano", "5-7": "Santa Domitilla", "5-8": "San Vittore il Moro", "5-9": "San Nicola di Bari (traslazione)", "5-10": "Sant'Antonino da Firenze", "5-11": "San Fabio", "5-12": "Santi Nereo e Achilleo", "5-13": "N.S. di Fatima", "5-14": "San Mattia", "5-15": "Sant'Isidoro Agricola", "5-17": "San Pasquale Baylon", "5-18": "San Giovanni I", "5-19": "San Pietro Celestino", "5-20": "San Bernardino da Siena", "5-21": "San Valente", "5-22": "Santa Rita da Cascia", "5-23": "San Desiderio", "5-24": "Maria Ausiliatrice", "5-25": "San Beda il Venerabile", "5-26": "San Filippo Neri", "5-28": "Sant'Emilio", "5-29": "San Massimino", "5-30": "Santa Giovanna d'Arco", "5-31": "Visitazione di Maria", "6-1": "San Giustino", "6-3": "San Carlo Lwanga", "6-4": "San Quirino", "6-5": "San Bonifacio", "6-6": "San Norberto", "6-7": "San Roberto", "6-8": "San Medardo", "6-9": "Sant'Efrem", "6-10": "Santa Diana", "6-11": "San Barnaba", "6-12": "Sant'Onofrio", "6-13": "Sant'Antonio da Padova", "6-14": "Sant'Eliseo", "6-15": "San Vito", "6-16": "Santa Lutgarda", "6-17": "San Ranieri", "6-18": "Santa Marina", "6-19": "San Romualdo", "6-20": "San Silverio", "6-21": "San Luigi Gonzaga", "6-22": "San Paolino da Nola", "6-23": "San Giuseppe Cafasso", "6-24": "Nativita di San Giovanni Battista", "6-25": "San Guglielmo da Vercelli", "6-26": "San Vigilio", "6-27": "San Cirillo d'Alessandria", "6-28": "Sant'Ireneo di Lione", "6-29": "Santi Pietro e Paolo", "6-30": "Primi Santi Martiri di Roma", "7-1": "San Teobaldo", "7-2": "Sant'Ottone", "7-3": "San Tommaso Apostolo", "7-4": "Santa Elisabetta del Portogallo", "7-5": "Sant'Antonio Maria Zaccaria", "7-6": "Santa Maria Goretti", "7-7": "Santi Fermo e Rustico", "7-8": "Sant'Adriano III", "7-9": "Santa Veronica Giuliani", "7-10": "Santi Sette Fratelli", "7-11": "San Benedetto da Norcia", "7-12": "San Fortunato", "7-13": "Sant'Enrico", "7-14": "San Camillo de Lellis", "7-15": "San Bonaventura", "7-16": "B.V. Maria del Monte Carmelo", "7-17": "Sant'Alessio", "7-18": "San Federico", "7-19": "Santa Giusta", "7-20": "Santa Margherita d'Antiochia", "7-21": "San Lorenzo da Brindisi", "7-22": "Santa Maria Maddalena", "7-23": "Santa Brigida di Svezia", "7-24": "Santa Cristina da Bolsena", "7-25": "San Giacomo Apostolo", "7-26": "Santi Anna e Gioacchino", "7-27": "San Pantaleone", "7-28": "Santi Nazario e Celso", "7-29": "Santa Marta", "7-30": "San Pietro Crisologo", "7-31": "Sant'Ignazio di Loyola", "8-2": "Sant'Eusebio di Vercelli", "8-3": "San Nicodemo", "8-4": "San Giovanni Maria Vianney", "8-5": "Dedicazione S. Maria Maggiore", "8-6": "Trasfigurazione del Signore", "8-7": "San Gaetano da Thiene", "8-8": "San Domenico di Guzman", "8-9": "Santa Teresa Benedetta della Croce", "8-10": "San Lorenzo", "8-11": "Santa Chiara d'Assisi", "8-12": "Santa Giovanna Francesca di Chantal", "8-13": "Sant'Ippolito", "8-14": "San Massimiliano Kolbe", "8-16": "San Rocco", "8-17": "San Giacinto", "8-18": "Sant'Elena Imperatrice", "8-19": "San Giovanni Eudes", "8-20": "San Bernardo di Chiaravalle", "8-21": "San Pio X", "8-22": "B.V. Maria Regina", "8-23": "Santa Rosa da Lima", "8-24": "San Bartolomeo", "8-25": "San Ludovico", "8-26": "Sant'Alessandro di Bergamo", "8-27": "Santa Monica", "8-28": "Sant'Agostino", "8-29": "Martirio di San Giovanni Battista", "8-30": "Santa Rosa da Viterbo", "8-31": "Sant'Aristide", "9-1": "Sant'Egidio", "9-2": "Sant'Elpidio", "9-3": "San Gregorio Magno", "9-4": "Santa Rosalia", "9-5": "San Vittorino", "9-6": "San Petronio", "9-7": "Santa Regina", "9-8": "Nativita di Maria", "9-9": "San Pietro Claver", "9-10": "San Nicola da Tolentino", "9-11": "Santi Proto e Giacinto", "9-12": "SS. Nome di Maria", "9-13": "San Giovanni Crisostomo", "9-14": "Esaltazione della Santa Croce", "9-15": "B.V. Maria Addolorata", "9-16": "Santi Cornelio e Cipriano", "9-17": "Stimmate di San Francesco", "9-18": "San Giuseppe da Copertino", "9-19": "San Gennaro", "9-20": "San Andrea Kim Taegon", "9-21": "San Matteo Evangelista", "9-23": "San Pio da Pietrelcina", "9-24": "N.S. della Mercede", "9-25": "San Cleofa", "9-26": "Santi Cosma e Damiano", "9-27": "San Vincenzo de' Paoli", "9-28": "San Venceslao", "9-29": "Santi Michele, Gabriele e Raffaele", "9-30": "San Girolamo", "10-1": "Santa Teresa di Gesu Bambino", "10-2": "Santi Angeli Custodi", "10-3": "San Gerardo", "10-4": "San Francesco d'Assisi", "10-5": "Santa Faustina Kowalska", "10-6": "San Bruno", "10-7": "B.V. Maria del Rosario", "10-8": "Santa Reparata", "10-9": "San Dionigi", "10-10": "San Daniele", "10-11": "San Giovanni XXIII", "10-12": "N.S. del Pilar", "10-13": "Sant'Edoardo", "10-14": "San Callisto I", "10-15": "Santa Teresa d'Avila", "10-16": "Santa Margherita Maria Alacoque", "10-17": "Sant'Ignazio di Antiochia", "10-18": "San Luca Evangelista", "10-19": "San Paolo della Croce", "10-20": "Santa Irene", "10-21": "Sant'Orsola", "10-22": "San Giovanni Paolo II", "10-23": "San Giovanni da Capestrano", "10-24": "Sant'Antonio Maria Claret", "10-25": "Santi Crispino e Crispiniano", "10-26": "Sant'Evaristo", "10-27": "San Fiorenzo", "10-28": "Santi Simone e Giuda", "10-29": "San Narciso", "10-30": "Sant'Alfonso Rodriguez", "10-31": "Vigilia di Ognissanti", "11-2": "Commemorazione dei Defunti", "11-3": "Sant'Uberto", "11-4": "San Carlo Borromeo", "11-5": "Santi Zaccaria ed Elisabetta", "11-6": "San Leonardo di Noblac", "11-7": "Sant'Engelberto", "11-8": "Santi Quattro Coronati", "11-9": "Dedicazione Basilica Lateranense", "11-10": "San Leone Magno", "11-11": "San Martino di Tours", "11-12": "San Giosafat", "11-13": "Sant'Omobono", "11-14": "San Giocondo", "11-15": "Sant'Alberto Magno", "11-16": "Santa Margherita di Scozia", "11-17": "Santa Elisabetta d'Ungheria", "11-18": "San Odone di Cluny", "11-19": "Santa Fausta", "11-20": "San Benigno", "11-21": "Presentazione di Maria", "11-22": "Santa Cecilia", "11-23": "San Clemente I", "11-24": "San Crisogono", "11-25": "Santa Caterina d'Alessandria", "11-26": "San Leonardo da Porto Maurizio", "11-27": "B.V. Maria della Medaglia Miracolosa", "11-28": "San Giacomo della Marca", "11-29": "San Saturnino", "11-30": "Sant'Andrea Apostolo", "12-1": "Sant'Eligio", "12-2": "Santa Bibiana", "12-3": "San Francesco Saverio", "12-4": "Santa Barbara", "12-5": "San Saba", "12-6": "San Nicola di Bari", "12-7": "Sant'Ambrogio", "12-9": "San Siro", "12-10": "N.S. di Loreto", "12-11": "San Damaso I", "12-12": "N.S. di Guadalupe", "12-13": "Santa Lucia", "12-14": "San Giovanni della Croce", "12-15": "San Valeriano", "12-16": "Santa Adelaide", "12-17": "San Lazzaro", "12-18": "B.V. Maria dell'Attesa", "12-19": "San Dario", "12-20": "San Domenico di Silos", "12-21": "San Pietro Canisio", "12-22": "Santa Francesca Saverio Cabrini", "12-23": "Santa Vittoria", "12-24": "Vigilia di Natale", "12-27": "San Giovanni Apostolo", "12-28": "Santi Innocenti", "12-29": "San Tommaso Becket", "12-30": "Santa Colomba", "12-31": "San Silvestro I"}};
+  const DATA = {"MONTH_NAMES": ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"], "HUMAN_ERA_PHRASES": ["~10.000 a.C. - inizia l’agricoltura nella Mezzaluna Fertile: comincia il conteggio olocenico.", "~7500 a.C. - a Çatalhöyük, in Anatolia, sorge una delle prime proto-città.", "~3500 a.C. - in Mesopotamia compare la ruota.", "~3200 a.C. - a Uruk nasce la scrittura cuneiforme, la prima scrittura conosciuta.", "~3100 a.C. - Alto e Basso Egitto vengono unificati sotto un’unica corona.", "~2560 a.C. - viene completata la Grande Piramide di Giza (data indicativa).", "~1200 a.C. - crolla il mondo del Bronzo; inizia l’Età del Ferro.", "753 a.C. - data tradizionale della fondazione di Roma.", "~105 d.C. - in Cina, sotto la dinastia Han, si perfeziona la carta.", "1088 d.C. - nasce l’Università di Bologna, la più antica al mondo.", "1440 d.C. - la stampa a caratteri mobili di Gutenberg inizia a diffondersi.", "20 luglio 1969 d.C. - l’essere umano lascia le prime impronte sulla Luna."], "NATIONAL": {"1-1": "Capodanno", "1-6": "Epifania", "4-25": "Festa della Liberazione", "5-1": "Festa dei Lavoratori", "6-2": "Festa della Repubblica", "8-15": "Ferragosto - Assunzione", "11-1": "Ognissanti", "12-8": "Immacolata Concezione", "12-25": "Natale", "12-26": "Santo Stefano"}, "LOCAL": {"12-7": "Sant’Ambrogio - festa patronale di Milano"}, "CHRISTIAN_FIXED": {"2-2": "Presentazione del Signore (Candelora)"}, "PAGAN": {"2-2": "Imbolc", "3-20": "Ostara - equinozio di primavera", "4-30": "Beltane (vigilia)", "6-21": "Litha - solstizio d’estate", "8-1": "Lughnasadh", "9-22": "Mabon - equinozio d’autunno", "10-31": "Samhain", "12-21": "Yule - solstizio d’inverno"}, "SAINTS": {"1-1": "Maria SS. Madre di Dio", "1-2": "San Basilio Magno", "1-3": "SS. Nome di Gesù", "1-4": "Sant’Ermete", "1-5": "Santa Amelia", "1-6": "Epifania del Signore", "1-7": "San Luciano", "1-8": "San Massimo", "1-9": "San Giuliano", "1-10": "San Aldo", "1-11": "San Igino", "1-12": "San Modesto", "1-13": "Sant’Ilario", "1-14": "San Felice", "1-15": "San Mauro", "1-16": "San Marcello", "1-17": "Sant’Antonio Abate", "1-18": "Santa Liberata", "1-19": "San Mario", "1-20": "San Sebastiano", "1-21": "Sant’Agnese", "1-22": "San Vincenzo", "1-23": "Sant’Emerenziana", "1-24": "San Francesco di Sales", "1-25": "Conversione di San Paolo", "1-26": "SS. Tito e Timoteo", "1-27": "Sant’Angela Merici", "1-28": "San Tommaso d’Aquino", "1-29": "San Costanzo", "1-30": "Santa Martina", "1-31": "San Giovanni Bosco", "2-1": "San Severo", "2-3": "San Biagio", "2-4": "Sant’Andrea Corsini", "2-5": "Sant’Agata", "2-6": "San Paolo Miki", "2-7": "San Riccardo", "2-8": "Santa Giuseppina Bakhita", "2-9": "Sant’Apollonia", "2-10": "Santa Scolastica", "2-11": "N.S. di Lourdes", "2-12": "Sant’Eulalia", "2-13": "Santa Maura", "2-14": "San Valentino", "2-15": "San Faustino", "2-16": "Santa Giuliana", "2-17": "Sette Santi Fondatori", "2-18": "San Simeone", "2-19": "San Corrado", "2-20": "Sant’Eleuterio", "2-21": "San Pier Damiani", "2-22": "Cattedra di San Pietro", "2-23": "San Policarpo", "2-24": "San Sergio", "2-25": "San Cesario", "2-26": "San Nestore", "2-27": "San Gabriele dell’Addolorata", "2-28": "San Romano", "3-1": "Sant’Albino", "3-2": "San Quinto", "3-3": "Santa Cunegonda", "3-4": "San Casimiro", "3-5": "Sant’Adriano", "3-6": "San Fridolino", "3-7": "Sante Perpetua e Felicita", "3-8": "San Giovanni di Dio", "3-9": "Santa Francesca Romana", "3-10": "San Simplicio", "3-11": "San Costantino", "3-12": "San Massimiliano", "3-13": "Santa Cristina", "3-14": "Santa Matilde", "3-15": "Santa Luisa de Marillac", "3-16": "Sant’Eriberto", "3-17": "San Patrizio", "3-18": "San Cirillo di Gerusalemme", "3-19": "San Giuseppe", "3-20": "San Giovanni Nepomuceno", "3-22": "San Lea", "3-23": "San Turibio de Mogrovejo", "3-24": "San Romolo", "3-30": "San Amedeo", "3-31": "San Beniamino", "4-1": "Sant’Ugo", "4-2": "San Francesco da Paola", "4-3": "San Riccardo", "4-4": "Sant’Isidoro di Siviglia", "4-6": "San Guglielmo", "4-7": "San Giovanni Battista de La Salle", "4-8": "San Dionigi", "4-9": "San Demetrio", "4-10": "San Terenzio", "4-11": "Santo Stanislao", "4-12": "Santa Giulia", "4-13": "Sant’Ermenegildo", "4-14": "Santa Liduina", "4-15": "San Damaso", "4-16": "Santa Bernadette", "4-17": "Sant’Aniceto", "4-18": "San Galdino", "4-19": "San Leone IX", "4-20": "Sant’Agnese da Montepulciano", "4-21": "Sant’Anselmo d’Aosta", "4-22": "San Leonida", "4-23": "San Giorgio", "4-24": "San Fedele da Sigmaringen", "4-25": "San Marco Evangelista", "4-26": "Santa Alda", "4-27": "Santa Zita", "4-28": "San Pietro Chanel", "4-29": "Santa Caterina da Siena", "4-30": "San Pio V", "5-2": "Sant’Atanasio", "5-3": "Santi Filippo e Giacomo", "5-4": "San Floriano", "5-5": "San Silvano", "5-7": "Santa Domitilla", "5-8": "San Vittore il Moro", "5-9": "San Nicola di Bari (traslazione)", "5-10": "Sant’Antonino da Firenze", "5-11": "San Fabio", "5-12": "Santi Nereo e Achilleo", "5-13": "N.S. di Fatima", "5-14": "San Mattia", "5-15": "Sant’Isidoro Agricola", "5-17": "San Pasquale Baylon", "5-18": "San Giovanni I", "5-19": "San Pietro Celestino", "5-20": "San Bernardino da Siena", "5-21": "San Valente", "5-22": "Santa Rita da Cascia", "5-23": "San Desiderio", "5-24": "Maria Ausiliatrice", "5-25": "San Beda il Venerabile", "5-26": "San Filippo Neri", "5-28": "Sant’Emilio", "5-29": "San Massimino", "5-30": "Santa Giovanna d’Arco", "5-31": "Visitazione di Maria", "6-1": "San Giustino", "6-3": "San Carlo Lwanga", "6-4": "San Quirino", "6-5": "San Bonifacio", "6-6": "San Norberto", "6-7": "San Roberto", "6-8": "San Medardo", "6-9": "Sant’Efrem", "6-10": "Santa Diana", "6-11": "San Barnaba", "6-12": "Sant’Onofrio", "6-13": "Sant’Antonio da Padova", "6-14": "Sant’Eliseo", "6-15": "San Vito", "6-16": "Santa Lutgarda", "6-17": "San Ranieri", "6-18": "Santa Marina", "6-19": "San Romualdo", "6-20": "San Silverio", "6-21": "San Luigi Gonzaga", "6-22": "San Paolino da Nola", "6-23": "San Giuseppe Cafasso", "6-24": "Natività di San Giovanni Battista", "6-25": "San Guglielmo da Vercelli", "6-26": "San Vigilio", "6-27": "San Cirillo d’Alessandria", "6-28": "Sant’Ireneo di Lione", "6-29": "Santi Pietro e Paolo", "6-30": "Primi Santi Martiri di Roma", "7-1": "San Teobaldo", "7-2": "Sant’Ottone", "7-3": "San Tommaso Apostolo", "7-4": "Santa Elisabetta del Portogallo", "7-5": "Sant’Antonio Maria Zaccaria", "7-6": "Santa Maria Goretti", "7-7": "Santi Fermo e Rustico", "7-8": "Sant’Adriano III", "7-9": "Santa Veronica Giuliani", "7-10": "Santi Sette Fratelli", "7-11": "San Benedetto da Norcia", "7-12": "San Fortunato", "7-13": "Sant’Enrico", "7-14": "San Camillo de Lellis", "7-15": "San Bonaventura", "7-16": "B.V. Maria del Monte Carmelo", "7-17": "Sant’Alessio", "7-18": "San Federico", "7-19": "Santa Giusta", "7-20": "Santa Margherita d’Antiochia", "7-21": "San Lorenzo da Brindisi", "7-22": "Santa Maria Maddalena", "7-23": "Santa Brigida di Svezia", "7-24": "Santa Cristina da Bolsena", "7-25": "San Giacomo Apostolo", "7-26": "Santi Anna e Gioacchino", "7-27": "San Pantaleone", "7-28": "Santi Nazario e Celso", "7-29": "Santa Marta", "7-30": "San Pietro Crisologo", "7-31": "Sant’Ignazio di Loyola", "8-2": "Sant’Eusebio di Vercelli", "8-3": "San Nicodemo", "8-4": "San Giovanni Maria Vianney", "8-5": "Dedicazione S. Maria Maggiore", "8-6": "Trasfigurazione del Signore", "8-7": "San Gaetano da Thiene", "8-8": "San Domenico di Guzman", "8-9": "Santa Teresa Benedetta della Croce", "8-10": "San Lorenzo", "8-11": "Santa Chiara d’Assisi", "8-12": "Santa Giovanna Francesca di Chantal", "8-13": "Sant’Ippolito", "8-14": "San Massimiliano Kolbe", "8-16": "San Rocco", "8-17": "San Giacinto", "8-18": "Sant’Elena Imperatrice", "8-19": "San Giovanni Eudes", "8-20": "San Bernardo di Chiaravalle", "8-21": "San Pio X", "8-22": "B.V. Maria Regina", "8-23": "Santa Rosa da Lima", "8-24": "San Bartolomeo", "8-25": "San Ludovico", "8-26": "Sant’Alessandro di Bergamo", "8-27": "Santa Monica", "8-28": "Sant’Agostino", "8-29": "Martirio di San Giovanni Battista", "8-30": "Santa Rosa da Viterbo", "8-31": "Sant’Aristide", "9-1": "Sant’Egidio", "9-2": "Sant’Elpidio", "9-3": "San Gregorio Magno", "9-4": "Santa Rosalia", "9-5": "San Vittorino", "9-6": "San Petronio", "9-7": "Santa Regina", "9-8": "Natività di Maria", "9-9": "San Pietro Claver", "9-10": "San Nicola da Tolentino", "9-11": "Santi Proto e Giacinto", "9-12": "SS. Nome di Maria", "9-13": "San Giovanni Crisostomo", "9-14": "Esaltazione della Santa Croce", "9-15": "B.V. Maria Addolorata", "9-16": "Santi Cornelio e Cipriano", "9-17": "Stimmate di San Francesco", "9-18": "San Giuseppe da Copertino", "9-19": "San Gennaro", "9-20": "San Andrea Kim Taegon", "9-21": "San Matteo Evangelista", "9-23": "San Pio da Pietrelcina", "9-24": "N.S. della Mercede", "9-25": "San Cleofa", "9-26": "Santi Cosma e Damiano", "9-27": "San Vincenzo de’ Paoli", "9-28": "San Venceslao", "9-29": "Santi Michele, Gabriele e Raffaele", "9-30": "San Girolamo", "10-1": "Santa Teresa di Gesù Bambino", "10-2": "Santi Angeli Custodi", "10-3": "San Gerardo", "10-4": "San Francesco d’Assisi", "10-5": "Santa Faustina Kowalska", "10-6": "San Bruno", "10-7": "B.V. Maria del Rosario", "10-8": "Santa Reparata", "10-9": "San Dionigi", "10-10": "San Daniele", "10-11": "San Giovanni XXIII", "10-12": "N.S. del Pilar", "10-13": "Sant’Edoardo", "10-14": "San Callisto I", "10-15": "Santa Teresa d’Avila", "10-16": "Santa Margherita Maria Alacoque", "10-17": "Sant’Ignazio di Antiochia", "10-18": "San Luca Evangelista", "10-19": "San Paolo della Croce", "10-20": "Santa Irene", "10-21": "Sant’Orsola", "10-22": "San Giovanni Paolo II", "10-23": "San Giovanni da Capestrano", "10-24": "Sant’Antonio Maria Claret", "10-25": "Santi Crispino e Crispiniano", "10-26": "Sant’Evaristo", "10-27": "San Fiorenzo", "10-28": "Santi Simone e Giuda", "10-29": "San Narciso", "10-30": "Sant’Alfonso Rodriguez", "10-31": "Vigilia di Ognissanti", "11-2": "Commemorazione dei Defunti", "11-3": "Sant’Uberto", "11-4": "San Carlo Borromeo", "11-5": "Santi Zaccaria ed Elisabetta", "11-6": "San Leonardo di Noblac", "11-7": "Sant’Engelberto", "11-8": "Santi Quattro Coronati", "11-9": "Dedicazione Basilica Lateranense", "11-10": "San Leone Magno", "11-11": "San Martino di Tours", "11-12": "San Giosafat", "11-13": "Sant’Omobono", "11-14": "San Giocondo", "11-15": "Sant’Alberto Magno", "11-16": "Santa Margherita di Scozia", "11-17": "Santa Elisabetta d’Ungheria", "11-18": "San Odone di Cluny", "11-19": "Santa Fausta", "11-20": "San Benigno", "11-21": "Presentazione di Maria", "11-22": "Santa Cecilia", "11-23": "San Clemente I", "11-24": "San Crisogono", "11-25": "Santa Caterina d’Alessandria", "11-26": "San Leonardo da Porto Maurizio", "11-27": "B.V. Maria della Medaglia Miracolosa", "11-28": "San Giacomo della Marca", "11-29": "San Saturnino", "11-30": "Sant’Andrea Apostolo", "12-1": "Sant’Eligio", "12-2": "Santa Bibiana", "12-3": "San Francesco Saverio", "12-4": "Santa Barbara", "12-5": "San Saba", "12-6": "San Nicola di Bari", "12-7": "Sant’Ambrogio", "12-9": "San Siro", "12-10": "N.S. di Loreto", "12-11": "San Damaso I", "12-12": "N.S. di Guadalupe", "12-13": "Santa Lucia", "12-14": "San Giovanni della Croce", "12-15": "San Valeriano", "12-16": "Santa Adelaide", "12-17": "San Lazzaro", "12-18": "B.V. Maria dell’Attesa", "12-19": "San Dario", "12-20": "San Domenico di Silos", "12-21": "San Pietro Canisio", "12-22": "Santa Francesca Saverio Cabrini", "12-23": "Santa Vittoria", "12-24": "Vigilia di Natale", "12-27": "San Giovanni Apostolo", "12-28": "Santi Innocenti", "12-29": "San Tommaso Becket", "12-30": "Santa Colomba", "12-31": "San Silvestro I"}};
+  const DEEP = {"1-1": [[-45, "Entra in vigore il calendario giuliano voluto da Giulio Cesare"], [1801, "Giuseppe Piazzi scopre Cerere dall’osservatorio di Palermo: è il primo asteroide noto"], [1948, "Entra in vigore la Costituzione della Repubblica Italiana"]], "1-2": [[1959, "Parte la sonda sovietica Luna 1, la prima a sfuggire alla gravità terrestre"]], "1-3": [[1521, "Papa Leone X scomunica Martin Lutero"]], "1-4": [[1643, "Nasce Isaac Newton (calendario gregoriano)"], [1958, "Edmund Hillary raggiunge il Polo Sud con i trattori"]], "1-5": [[1933, "Iniziano i lavori del Golden Gate Bridge"]], "1-6": [[1066, "Harold Godwinson viene incoronato re d’Inghilterra"]], "1-7": [[1610, "Galileo osserva per la prima volta le lune di Giove"]], "1-8": [[1642, "Muore Galileo Galilei ad Arcetri"]], "1-9": [[2007, "Steve Jobs presenta il primo iPhone"]], "1-10": [[-49, "Cesare attraversa il Rubicone: «il dado è tratto» (data tradizionale)"]], "1-11": [[1922, "Prima iniezione di insulina a un paziente umano, a Toronto"]], "1-13": [[1898, "Émile Zola pubblica «J’accuse» sull’affare Dreyfus"]], "1-14": [[2005, "La sonda Huygens atterra su Titano"]], "1-15": [[2001, "Nasce Wikipedia"], [1759, "Apre al pubblico il British Museum"]], "1-16": [[-27, "Ottaviano riceve dal Senato il titolo di Augusto"]], "1-17": [[1773, "James Cook è il primo a superare il Circolo Polare Antartico"], [1912, "Robert Falcon Scott raggiunge il Polo Sud e vi trova la bandiera di Amundsen"]], "1-18": [[1871, "Proclamazione dell’Impero tedesco nella Sala degli Specchi di Versailles"]], "1-19": [[1736, "Nasce James Watt"]], "1-20": [[1265, "Si riunisce il primo parlamento inglese con rappresentanti delle città"]], "1-21": [[1793, "Luigi XVI viene ghigliottinato a Parigi"], [1976, "Primo volo commerciale del Concorde"]], "1-22": [[1905, "La «domenica di sangue» a San Pietroburgo apre la rivoluzione russa del 1905"]], "1-23": [[1849, "Elizabeth Blackwell è la prima donna a laurearsi in medicina negli Stati Uniti"]], "1-24": [[1848, "Scoperto l’oro a Sutter’s Mill, in California"]], "1-25": [[1924, "Si aprono a Chamonix i primi Giochi olimpici invernali"]], "1-26": [[1788, "La Prima Flotta approda a Sydney Cove"]], "1-27": [[1756, "Nasce Wolfgang Amadeus Mozart"], [1945, "L’Armata Rossa libera Auschwitz (Giorno della Memoria)"]], "1-28": [[814, "Muore Carlo Magno ad Aquisgrana"]], "1-29": [[1886, "Karl Benz brevetta la Motorwagen, considerata la prima automobile"]], "1-30": [[1649, "Carlo I d’Inghilterra viene decapitato"], [1948, "Il Mahatma Gandhi viene assassinato a Nuova Delhi"]], "1-31": [[1958, "Gli Stati Uniti lanciano Explorer 1, il loro primo satellite"]], "2-1": [[1884, "Esce il primo fascicolo dell’Oxford English Dictionary"]], "2-2": [[1990, "De Klerk annuncia la fine del bando all’ANC in Sudafrica"]], "2-3": [[1966, "Luna 9 è il primo veicolo a posarsi dolcemente sulla Luna"]], "2-4": [[1945, "Si apre la conferenza di Yalta"], [2004, "Nasce Facebook"]], "2-5": [[1971, "Apollo 14 atterra sulla Luna"]], "2-6": [[1840, "Trattato di Waitangi in Nuova Zelanda"]], "2-7": [[1497, "A Firenze il «falò delle vanità» di Savonarola"]], "2-8": [[1587, "Maria Stuarda, regina di Scozia, viene giustiziata"]], "2-9": [[1986, "La cometa di Halley passa al perielio"]], "2-10": [[1996, "Il computer Deep Blue batte Kasparov in una partita: è la prima volta contro un campione del mondo"]], "2-11": [[1929, "Firmati i Patti Lateranensi tra Italia e Santa Sede"], [1990, "Nelson Mandela esce di prigione dopo 27 anni"]], "2-12": [[1809, "Nascono Charles Darwin e Abraham Lincoln"]], "2-13": [[1633, "Galileo arriva a Roma per il processo dell’Inquisizione"]], "2-14": [[1990, "Voyager 1 scatta il «Pale Blue Dot», la Terra come un puntino azzurro"]], "2-15": [[1564, "Nasce Galileo Galilei a Pisa"]], "2-16": [[1923, "Howard Carter apre la camera funeraria di Tutankhamon"]], "2-17": [[1600, "Giordano Bruno viene arso vivo a Campo de’ Fiori"]], "2-18": [[1930, "Clyde Tombaugh annuncia la scoperta di Plutone"]], "2-19": [[1473, "Nasce Niccolò Copernico"]], "2-20": [[1962, "John Glenn è il primo americano a orbitare attorno alla Terra"]], "2-21": [[1848, "Marx ed Engels pubblicano il Manifesto del Partito Comunista"]], "2-22": [[1997, "Annunciata la pecora Dolly, primo mammifero clonato da una cellula adulta"]], "2-24": [[1582, "Papa Gregorio XIII promulga la bolla che istituisce il calendario gregoriano"]], "2-26": [[1815, "Napoleone fugge dall’isola d’Elba"]], "2-27": [[1933, "Incendio del Reichstag a Berlino"]], "2-28": [[1953, "Watson e Crick riconoscono la struttura a doppia elica del DNA"]], "2-29": [[1504, "Colombo sfrutta una previsione di eclissi lunare per impressionare gli indigeni della Giamaica"]], "3-1": [[1896, "Henri Becquerel scopre la radioattività"]], "3-2": [[1969, "Primo volo del Concorde"]], "3-3": [[1847, "Nasce Alexander Graham Bell"]], "3-5": [[1616, "Il De revolutionibus di Copernico viene sospeso dalla Chiesa"]], "3-6": [[1475, "Nasce Michelangelo Buonarroti a Caprese"]], "3-7": [[1274, "Muore Tommaso d’Aquino"]], "3-8": [[1917, "A Pietrogrado iniziano le proteste che portano alla Rivoluzione di febbraio"]], "3-9": [[1454, "Nasce Amerigo Vespucci a Firenze"]], "3-10": [[1876, "Alexander Graham Bell effettua la prima telefonata"]], "3-11": [[1851, "Prima del «Rigoletto» di Verdi al Teatro La Fenice di Venezia"]], "3-12": [[1930, "Gandhi inizia la Marcia del Sale"]], "3-13": [[1781, "William Herschel scopre Urano"]], "3-14": [[1879, "Nasce Albert Einstein a Ulm"], [1883, "Muore Karl Marx a Londra"]], "3-15": [[-44, "Le Idi di marzo: Giulio Cesare viene assassinato"]], "3-16": [[1521, "Magellano raggiunge le Filippine"]], "3-17": [[1861, "Proclamato il Regno d’Italia"]], "3-18": [[1965, "Aleksej Leonov compie la prima passeggiata spaziale"]], "3-20": [[1815, "Napoleone rientra a Parigi: iniziano i Cento giorni"]], "3-21": [[1960, "Massacro di Sharpeville in Sudafrica"]], "3-22": [[1895, "Primo spettacolo privato dei fratelli Lumière"]], "3-23": [[1919, "A Milano, in piazza San Sepolcro, nascono i Fasci italiani di combattimento"]], "3-24": [[1882, "Robert Koch annuncia la scoperta del bacillo della tubercolosi"]], "3-25": [[421, "Data tradizionale della fondazione di Venezia"]], "3-26": [[1827, "Muore Ludwig van Beethoven a Vienna"]], "3-27": [[1899, "Marconi trasmette il primo segnale radio attraverso la Manica"]], "3-28": [[1930, "Costantinopoli viene ufficialmente rinominata Istanbul"]], "3-29": [[1974, "Scoperto per caso l’Esercito di terracotta a Xi’an"]], "3-30": [[1282, "Iniziano i Vespri siciliani"]], "3-31": [[1889, "Inaugurata la Torre Eiffel"]], "4-1": [[1976, "Jobs, Wozniak e Wayne fondano Apple"]], "4-2": [[1805, "Nasce Hans Christian Andersen"]], "4-3": [[1973, "Martin Cooper effettua la prima telefonata da un telefono cellulare"]], "4-4": [[1949, "Viene firmato il Patto Atlantico: nasce la NATO"]], "4-5": [[1722, "Jacob Roggeveen avvista l’isola di Pasqua, proprio nel giorno di Pasqua"]], "4-6": [[-648, "Eclissi solare descritta dal poeta Archiloco, tra le prime databili con precisione (data calcolata)"], [1896, "Ad Atene si aprono i primi Giochi olimpici moderni"]], "4-7": [[1948, "Nasce l’Organizzazione mondiale della sanità"]], "4-8": [[1911, "Heike Kamerlingh Onnes scopre la superconduttività"]], "4-10": [[1815, "Inizia la gigantesca eruzione del vulcano Tambora"]], "4-11": [[1970, "Parte la missione Apollo 13"]], "4-12": [[1961, "Jurij Gagarin è il primo essere umano nello spazio"], [1981, "Primo lancio dello Space Shuttle, con il Columbia"]], "4-13": [[1204, "I crociati della Quarta crociata saccheggiano Costantinopoli"]], "4-14": [[1865, "Abraham Lincoln viene colpito a teatro; morirà il giorno dopo"], [1912, "Il Titanic urta l’iceberg"]], "4-15": [[1452, "Nasce Leonardo da Vinci"]], "4-17": [[1492, "Capitolazioni di Santa Fe: la Spagna finanzia il viaggio di Colombo"]], "4-18": [[1906, "Terremoto di San Francisco"], [1955, "Muore Albert Einstein a Princeton"]], "4-19": [[1971, "Lancio di Saljut 1, la prima stazione spaziale"]], "4-20": [[1902, "Marie e Pierre Curie isolano il cloruro di radio"]], "4-21": [[-753, "Data tradizionale della fondazione di Roma"]], "4-22": [[1500, "Pedro Álvares Cabral approda in Brasile"]], "4-24": [[1990, "Il telescopio spaziale Hubble viene messo in orbita"]], "4-25": [[1945, "Da Milano il CLNAI proclama l’insurrezione generale contro i nazifascisti"]], "4-26": [[1986, "Disastro nucleare di Černobyl’"]], "4-27": [[1521, "Magellano muore a Mactan, nelle Filippine"]], "4-28": [[1789, "Ammutinamento del Bounty"]], "4-29": [[1429, "Giovanna d’Arco entra a Orléans"]], "4-30": [[1006, "Gli astronomi osservano la supernova SN 1006, la più luminosa mai registrata"]], "5-1": [[1886, "A Chicago inizia lo sciopero per la giornata lavorativa di otto ore"]], "5-2": [[1519, "Muore Leonardo da Vinci ad Amboise"]], "5-3": [[1469, "Nasce Niccolò Machiavelli"]], "5-5": [[1821, "Muore Napoleone a Sant’Elena"]], "5-6": [[1937, "Il dirigibile Hindenburg prende fuoco a Lakehurst"]], "5-7": [[1824, "Prima esecuzione della Nona sinfonia di Beethoven"]], "5-8": [[1945, "Fine della guerra in Europa"]], "5-9": [[1950, "Dichiarazione Schuman: primo passo verso l’Unione europea"]], "5-10": [[1869, "Completata la ferrovia transcontinentale americana a Promontory Summit"]], "5-11": [[330, "Costantino inaugura Costantinopoli"]], "5-12": [[1820, "Nasce Florence Nightingale a Firenze"]], "5-13": [[1981, "Attentato a Papa Giovanni Paolo II in piazza San Pietro"]], "5-14": [[1796, "Edward Jenner esegue il primo vaccino contro il vaiolo"]], "5-15": [[1618, "Keplero formula la terza legge del moto planetario"]], "5-16": [[1960, "Theodore Maiman fa funzionare il primo laser"]], "5-17": [[1902, "Scoperto il meccanismo di Antikythera, calcolatore astronomico greco di oltre duemila anni fa"]], "5-18": [[1804, "Napoleone viene proclamato imperatore dei francesi"]], "5-19": [[1536, "Anna Bolena viene giustiziata"]], "5-20": [[1498, "Vasco da Gama giunge a Calicut, in India"]], "5-21": [[1927, "Lindbergh atterra a Parigi dopo la prima trasvolata atlantica in solitaria"]], "5-22": [[1859, "Nasce Arthur Conan Doyle"]], "5-23": [[1498, "Girolamo Savonarola viene impiccato e arso a Firenze"]], "5-24": [[1844, "Samuel Morse invia il primo telegramma a lunga distanza"]], "5-25": [[1977, "Esce nei cinema «Guerre stellari»"]], "5-27": [[1703, "Pietro il Grande fonda San Pietroburgo"]], "5-28": [[-585, "Eclissi solare durante la battaglia dell’Halys, che la tradizione lega a Talete (data calcolata)"]], "5-29": [[1453, "Cade Costantinopoli: fine dell’Impero bizantino"], [1953, "Hillary e Tenzing raggiungono la vetta dell’Everest"]], "5-30": [[1431, "Giovanna d’Arco viene mandata al rogo a Rouen"]], "6-1": [[1980, "Nasce la CNN, primo canale all news"]], "6-2": [[1946, "Referendum istituzionale: l’Italia diventa una Repubblica"]], "6-3": [[1965, "Ed White compie la prima passeggiata spaziale americana"]], "6-4": [[1859, "Battaglia di Magenta, a pochi chilometri da Milano"]], "6-6": [[1944, "Sbarco in Normandia (D-Day)"]], "6-7": [[1494, "Trattato di Tordesillas: Spagna e Portogallo si spartiscono il mondo"]], "6-8": [[632, "Muore il profeta Maometto (data tradizionale)"]], "6-9": [[68, "Muore Nerone"]], "6-10": [[1924, "Il deputato Giacomo Matteotti viene rapito a Roma"]], "6-11": [[-323, "Muore Alessandro Magno a Babilonia (tra il 10 e l’11 giugno)"]], "6-13": [[1231, "Muore Sant’Antonio a Padova"]], "6-14": [[1800, "Battaglia di Marengo"]], "6-15": [[1215, "Re Giovanni d’Inghilterra sigilla la Magna Carta"]], "6-16": [[1963, "Valentina Tereškova è la prima donna nello spazio"]], "6-18": [[1815, "Battaglia di Waterloo"]], "6-19": [[1623, "Nasce Blaise Pascal"]], "6-20": [[451, "Battaglia dei Campi Catalaunici contro Attila (data tradizionale)"]], "6-22": [[1633, "Galileo abiura davanti al Sant’Uffizio"]], "6-23": [[1912, "Nasce Alan Turing"]], "6-24": [[1497, "Giovanni Caboto avvista il Nord America (data tradizionale)"]], "6-25": [[1950, "Inizia la guerra di Corea"]], "6-26": [[1945, "A San Francisco viene firmata la Carta delle Nazioni Unite"]], "6-27": [[1954, "A Obninsk entra in funzione la prima centrale nucleare collegata a una rete elettrica"]], "6-28": [[1914, "Attentato di Sarajevo"]], "6-29": [[1613, "Il Globe Theatre di Shakespeare va a fuoco"]], "6-30": [[1908, "Evento di Tunguska in Siberia"]], "7-1": [[1858, "Darwin e Wallace presentano la teoria dell’evoluzione alla Linnean Society"]], "7-2": [[1900, "Primo volo dello Zeppelin"]], "7-3": [[1608, "Samuel de Champlain fonda Québec"]], "7-4": [[1054, "Gli astronomi cinesi registrano la supernova da cui nascerà la Nebulosa del Granchio"], [1776, "Dichiarazione d’indipendenza degli Stati Uniti"]], "7-5": [[1687, "Newton pubblica i «Principia Mathematica»"]], "7-6": [[1885, "Louis Pasteur testa il vaccino antirabbico su un essere umano"]], "7-8": [[1497, "Vasco da Gama parte da Lisbona verso l’India"]], "7-10": [[1856, "Nasce Nikola Tesla"]], "7-11": [[1979, "La stazione spaziale Skylab rientra nell’atmosfera"]], "7-12": [[-100, "Nasce Giulio Cesare (12 o 13 luglio, data tradizionale)"]], "7-13": [[1985, "Concerto Live Aid"]], "7-14": [[1789, "Presa della Bastiglia"]], "7-15": [[1799, "Viene scoperta la stele di Rosetta, chiave per decifrare i geroglifici"]], "7-16": [[622, "Inizio dell’era islamica, l’Egira (data tradizionale)"], [1945, "Primo test nucleare della storia, Trinity"], [1969, "Parte la missione Apollo 11"]], "7-17": [[1955, "Apre Disneyland"]], "7-19": [[64, "Inizia il grande incendio di Roma"]], "7-20": [[1304, "Nasce Francesco Petrarca ad Arezzo"], [1969, "Armstrong e Aldrin sbarcano sulla Luna"]], "7-21": [[-356, "Brucia il tempio di Artemide a Efeso (data tradizionale)"]], "7-24": [[1911, "Hiram Bingham raggiunge Machu Picchu"]], "7-25": [[1978, "Nasce Louise Brown, la prima bambina nata con fecondazione in vitro"]], "7-26": [[1887, "Pubblicato il primo manuale di esperanto"]], "7-27": [[1794, "9 termidoro: cade Robespierre"]], "7-28": [[1914, "L’Austria-Ungheria dichiara guerra alla Serbia"]], "7-29": [[1957, "Nasce l’Agenzia internazionale per l’energia atomica"]], "7-31": [[1498, "Colombo avvista l’isola di Trinidad"]], "8-1": [[1774, "Joseph Priestley isola l’ossigeno"]], "8-2": [[-216, "Battaglia di Canne: Annibale annienta l’esercito romano (data tradizionale)"]], "8-3": [[1492, "Colombo salpa da Palos"]], "8-4": [[1944, "Anne Frank e la sua famiglia vengono arrestate ad Amsterdam"]], "8-6": [[1945, "Bomba atomica su Hiroshima"]], "8-7": [[1947, "La zattera Kon-Tiki approda a Raroia"]], "8-9": [[1945, "Bomba atomica su Nagasaki"]], "8-10": [[1519, "Magellano parte da Siviglia per il giro del mondo"]], "8-12": [[1877, "Asaph Hall scopre Deimos, una delle due lune di Marte"], [1990, "Scoperto in South Dakota lo scheletro di T. rex «Sue»"]], "8-13": [[1961, "Inizia la costruzione del Muro di Berlino"]], "8-15": [[1914, "Inaugurato il Canale di Panama"]], "8-16": [[1896, "Scoperto l’oro nel Klondike"]], "8-17": [[1807, "Il battello a vapore di Robert Fulton compie il primo viaggio sull’Hudson"]], "8-18": [[1868, "Janssen osserva l’elio nello spettro del Sole durante un’eclissi"], [1877, "Asaph Hall scopre Fobos, l’altra luna di Marte"]], "8-19": [[14, "Muore Augusto"]], "8-20": [[1977, "Parte la sonda Voyager 2"]], "8-21": [[1911, "La Gioconda viene rubata dal Louvre"]], "8-22": [[1485, "Battaglia di Bosworth, fine della guerra delle Due Rose"]], "8-23": [[1305, "William Wallace viene giustiziato a Londra"]], "8-24": [[79, "Eruzione del Vesuvio che seppellisce Pompei (data tradizionale, oggi discussa)"]], "8-25": [[1609, "Galileo presenta il telescopio al Senato veneziano"]], "8-26": [[1789, "Dichiarazione dei diritti dell’uomo e del cittadino"]], "8-27": [[1883, "Esplode il vulcano Krakatoa"]], "8-28": [[430, "Muore Agostino d’Ippona"]], "8-29": [[1831, "Michael Faraday scopre l’induzione elettromagnetica"]], "8-30": [[1797, "Nasce Mary Shelley"]], "9-1": [[1715, "Muore Luigi XIV"]], "9-2": [[-31, "Battaglia di Azio: Ottaviano sconfigge Antonio e Cleopatra"]], "9-3": [[1976, "La sonda Viking 2 atterra su Marte"]], "9-4": [[476, "Romolo Augustolo viene deposto: fine tradizionale dell’Impero romano d’Occidente"]], "9-5": [[1977, "Parte la sonda Voyager 1"]], "9-6": [[1522, "La nave Victoria rientra in Spagna: prima circumnavigazione del globo"]], "9-7": [[1533, "Nasce Elisabetta I d’Inghilterra"]], "9-8": [[1943, "L’Italia annuncia l’armistizio"]], "9-10": [[2008, "Primi fasci di protoni nel Large Hadron Collider del CERN"]], "9-11": [[2001, "Attentati dell’11 settembre"]], "9-12": [[1940, "Scoperte le grotte di Lascaux e le loro pitture di circa 17.000 anni fa"]], "9-13": [[1321, "Muore Dante Alighieri a Ravenna (nella notte tra il 13 e il 14)"]], "9-14": [[1752, "La Gran Bretagna adotta il calendario gregoriano"]], "9-15": [[1830, "Inaugurata la ferrovia Liverpool-Manchester"]], "9-16": [[1620, "Il Mayflower salpa da Plymouth verso l’America"]], "9-17": [[1787, "Firmata la Costituzione degli Stati Uniti"]], "9-18": [[96, "Viene assassinato l’imperatore Domiziano"]], "9-19": [[1991, "Scoperta sulle Alpi la mummia di Ötzi, vissuto oltre 5.000 anni fa"]], "9-20": [[1870, "Breccia di Porta Pia: Roma capitale d’Italia"]], "9-21": [[1937, "Esce «Lo Hobbit» di Tolkien"]], "9-22": [[1792, "Primo giorno dell’Anno I del calendario repubblicano francese"]], "9-23": [[-63, "Nasce Augusto"], [1846, "Johann Galle osserva Nettuno, previsto dai calcoli di Le Verrier"]], "9-24": [[1852, "Henri Giffard compie il primo volo con un dirigibile a vapore"]], "9-25": [[1513, "Vasco Núñez de Balboa avvista l’Oceano Pacifico"]], "9-26": [[1687, "Il Partenone viene gravemente danneggiato dal bombardamento veneziano"]], "9-27": [[1825, "Inaugurata la ferrovia Stockton-Darlington"]], "9-28": [[-48, "Pompeo viene ucciso in Egitto"], [1066, "Guglielmo il Conquistatore sbarca a Pevensey"]], "9-29": [[1902, "Muore Émile Zola"]], "9-30": [[1791, "Prima del «Flauto magico» di Mozart a Vienna"]], "10-1": [[-331, "Battaglia di Gaugamela: Alessandro Magno sconfigge Dario III"], [1958, "La NASA inizia le attività"]], "10-2": [[1187, "Saladino conquista Gerusalemme"]], "10-3": [[1990, "Riunificazione della Germania"]], "10-4": [[1582, "Ultimo giorno del calendario giuliano in Italia: il giorno dopo è il 15 ottobre"], [1957, "L’Unione Sovietica lancia lo Sputnik 1"]], "10-5": [[1789, "La marcia delle donne su Versailles"]], "10-7": [[1571, "Battaglia di Lepanto"]], "10-8": [[1871, "Inizia il grande incendio di Chicago"]], "10-9": [[1604, "Osservata la supernova di Keplero, l’ultima visibile a occhio nudo nella Via Lattea"], [1967, "Muore Che Guevara in Bolivia"]], "10-10": [[1846, "William Lassell scopre Tritone, luna di Nettuno"]], "10-11": [[1968, "Parte la missione Apollo 7"]], "10-12": [[1492, "Colombo avvista le Americhe"]], "10-13": [[1307, "Arresto dei Templari in Francia"]], "10-14": [[1066, "Battaglia di Hastings"]], "10-15": [[1582, "Primo giorno del calendario gregoriano nei paesi che lo adottarono subito"]], "10-16": [[1846, "Prima dimostrazione pubblica dell’anestesia con etere, a Boston"]], "10-18": [[1922, "Nasce la British Broadcasting Company, la BBC"]], "10-19": [[1781, "Cornwallis si arrende a Yorktown"]], "10-21": [[1805, "Battaglia di Trafalgar"]], "10-22": [[1879, "Edison fa brillare per oltre tredici ore la sua lampadina a filamento di carbonio"]], "10-23": [[-4004, "Secondo il vescovo Ussher, la Creazione sarebbe iniziata nella notte precedente questo giorno (calcolo del 1650)"]], "10-24": [[1861, "Completata la prima linea telegrafica transcontinentale americana"]], "10-25": [[1415, "Battaglia di Azincourt"]], "10-27": [[1904, "Apre la metropolitana di New York"]], "10-28": [[312, "Battaglia di Ponte Milvio: Costantino sconfigge Massenzio"]], "10-29": [[1929, "Martedì nero: crollo della Borsa di Wall Street"]], "10-30": [[1938, "Orson Welles trasmette «La guerra dei mondi»"]], "10-31": [[1517, "Lutero affigge le 95 tesi a Wittenberg"]], "11-1": [[1755, "Terremoto di Lisbona"]], "11-2": [[1975, "Pier Paolo Pasolini viene assassinato a Ostia"]], "11-3": [[1957, "La cagnetta Laika viene lanciata sullo Sputnik 2"]], "11-4": [[1922, "Howard Carter scopre l’ingresso della tomba di Tutankhamon"]], "11-5": [[1605, "Congiura delle polveri: Guy Fawkes viene arrestato"]], "11-6": [[1860, "Abraham Lincoln viene eletto presidente degli Stati Uniti"]], "11-7": [[1867, "Nasce Marie Curie a Varsavia"]], "11-8": [[1895, "Wilhelm Röntgen scopre i raggi X"]], "11-9": [[1989, "Cade il Muro di Berlino"]], "11-10": [[1483, "Nasce Martin Lutero"]], "11-11": [[1918, "Armistizio di Compiègne: finisce la Prima guerra mondiale"]], "11-12": [[1980, "Voyager 1 sorvola Saturno"]], "11-13": [[354, "Nasce Agostino d’Ippona"]], "11-14": [[1963, "Nasce al largo dell’Islanda l’isola vulcanica di Surtsey"]], "11-16": [[1974, "Il radiotelescopio di Arecibo trasmette un messaggio verso l’ammasso stellare M13"]], "11-17": [[1869, "Inaugurato il Canale di Suez"]], "11-18": [[1928, "Debutta Topolino in «Steamboat Willie»"]], "11-19": [[1493, "Colombo avvista Porto Rico"]], "11-20": [[1998, "Lancio di Zarya, primo modulo della Stazione spaziale internazionale"]], "11-21": [[1783, "Primo volo umano libero in mongolfiera, a Parigi"]], "11-22": [[1963, "Assassinio di John F. Kennedy a Dallas"]], "11-23": [[1980, "Terremoto dell’Irpinia"]], "11-24": [[1859, "Darwin pubblica «L’origine delle specie»"], [1974, "Scoperta «Lucy», un australopiteco di circa 3,2 milioni di anni fa"]], "11-26": [[1922, "Carter guarda nella tomba di Tutankhamon e vede «cose meravigliose»"]], "11-27": [[1095, "Urbano II bandisce la Prima crociata a Clermont"]], "11-28": [[1520, "Magellano sbocca nell’Oceano Pacifico"]], "11-29": [[1972, "Esce Pong, uno dei primi videogiochi di successo"]], "11-30": [[1835, "Nasce Mark Twain"]], "12-1": [[1955, "Rosa Parks rifiuta di cedere il posto su un autobus a Montgomery"]], "12-2": [[1804, "Napoleone si incorona imperatore a Notre-Dame"], [1942, "A Chicago Enrico Fermi ottiene la prima reazione nucleare a catena controllata"]], "12-3": [[1967, "Christiaan Barnard esegue il primo trapianto di cuore"]], "12-4": [[1639, "Jeremiah Horrocks osserva il transito di Venere sul Sole"]], "12-5": [[1492, "Colombo approda a Hispaniola"]], "12-7": [[374, "Ambrogio viene eletto vescovo di Milano"]], "12-8": [[1854, "Pio IX proclama il dogma dell’Immacolata Concezione"]], "12-9": [[1968, "Douglas Engelbart presenta mouse e interfaccia grafica nella «madre di tutte le demo»"]], "12-10": [[1901, "Vengono consegnati i primi premi Nobel"]], "12-11": [[1936, "Edoardo VIII abdica al trono britannico"]], "12-12": [[1901, "Marconi riceve a Terranova il primo segnale radio transatlantico"]], "12-13": [[1642, "Abel Tasman avvista la Nuova Zelanda"]], "12-14": [[1911, "Roald Amundsen raggiunge il Polo Sud"]], "12-15": [[1970, "Venera 7 è la prima sonda a trasmettere dalla superficie di un altro pianeta"]], "12-16": [[1773, "Boston Tea Party"]], "12-17": [[1903, "Primo volo dei fratelli Wright"]], "12-18": [[1892, "Prima del «Lo schiaccianoci» di Čajkovskij a San Pietroburgo"]], "12-20": [[1803, "Gli Stati Uniti prendono possesso della Louisiana acquistata dalla Francia"]], "12-21": [[1968, "Parte Apollo 8, la prima missione umana verso la Luna"]], "12-22": [[1938, "Pescato il primo celacanto vivente, un «fossile vivente»"]], "12-23": [[1947, "Presentato ai Bell Labs il primo transistor"]], "12-24": [[1968, "Gli astronauti di Apollo 8 fotografano la Terra che sorge sulla Luna"]], "12-25": [[800, "Carlo Magno viene incoronato imperatore a Roma"]], "12-26": [[2004, "Tsunami nell’Oceano Indiano"]], "12-27": [[1571, "Nasce Giovanni Keplero"], [1831, "La Beagle salpa con Darwin a bordo"]], "12-28": [[1895, "Prima proiezione pubblica a pagamento dei fratelli Lumière"], [1908, "Terremoto di Messina e Reggio Calabria"]], "12-29": [[1170, "Thomas Becket viene ucciso nella cattedrale di Canterbury"]], "12-31": [[1879, "Edison illumina Menlo Park con la luce elettrica"]]};
 
-  const WEEKDAY_NAMES = ["domenica","lunedi","martedi","mercoledi","giovedi","venerdi","sabato"];
+  const WEEKDAY_NAMES = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+  const SHORT_MONTHS = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+  const IFC_MONTHS = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Sol","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+  const IFC_SHORT = ["Gen","Feb","Mar","Apr","Mag","Giu","Sol","Lug","Ago","Set","Ott","Nov","Dic"];
+  const IFC_WEEKDAYS = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+  const SPECIAL_LABEL = { year: "Giorno dell’Anno", leap: "Giorno Bisestile" };
+  const MILAN = { lat: 45.4642, lon: 9.19 };
 
+  const el = (id) => document.getElementById(id);
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const fmtNum = (n) => String(Math.abs(Math.round(n))).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const isLeapYear = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  const dayKey = (y, m0, d) => y + '-' + pad2(m0 + 1) + '-' + pad2(d);
+  const dateKey = (dt) => dayKey(dt.getFullYear(), dt.getMonth(), dt.getDate());
+
+  function addDays(date, n){ const d = new Date(date); d.setDate(d.getDate() + n); return d; }
+  function sameDate(a, b){ return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+  function dayOfYear(date){ return Math.round((new Date(date.getFullYear(), date.getMonth(), date.getDate()) - new Date(date.getFullYear(), 0, 1)) / 86400000) + 1; }
+  function dateFromDoy(year, doy){ return new Date(year, 0, doy); }
+
+  /* ---------- Easter and moveable feasts ---------- */
   function easterDate(year){
-    const a = year % 19;
-    const b = Math.floor(year/100);
-    const c = year % 100;
-    const d = Math.floor(b/4);
-    const e = b % 4;
-    const f = Math.floor((b+8)/25);
-    const g = Math.floor((b-f+1)/3);
-    const h = (19*a+b-d-g+15)%30;
-    const i = Math.floor(c/4);
-    const k = c%4;
-    const l = (32+2*e+2*i-h-k)%7;
-    const m = Math.floor((a+11*h+22*l)/451);
-    const month = Math.floor((h+l-7*m+114)/31);
-    const day = ((h+l-7*m+114)%31)+1;
-    return new Date(year, month-1, day);
+    const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+    const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31);
+    const day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
   }
 
-  function addDays(date, n){
-    const d = new Date(date);
-    d.setDate(d.getDate()+n);
-    return d;
-  }
-
-  function sameDate(a,b){
-    return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
-  }
-
-  function buildMoveableFeasts(year){
+  const moveableCache = {};
+  function getMoveable(year){
+    if (moveableCache[year]) return moveableCache[year];
     const easter = easterDate(year);
-    const feasts = {};
-    feasts["Mercoledi delle Ceneri"] = addDays(easter,-46);
-    feasts["Domenica delle Palme"] = addDays(easter,-7);
-    feasts["Giovedi Santo"] = addDays(easter,-3);
-    feasts["Venerdi Santo"] = addDays(easter,-2);
-    feasts["Sabato Santo"] = addDays(easter,-1);
-    feasts["Pasqua"] = easter;
-    feasts["Pasquetta"] = addDays(easter,1);
-    feasts["Ascensione"] = addDays(easter,39);
-    feasts["Pentecoste"] = addDays(easter,49);
-    feasts["Corpus Domini"] = addDays(easter,60);
-
-    // Annunciazione: normally 25 March, transferred if it falls within Holy Week
-    // (Palm Sunday .. Easter) to the Monday after the Easter Octave.
-    const annunciationDefault = new Date(year, 2, 25);
-    const palmSunday = feasts["Domenica delle Palme"];
-    if (annunciationDefault >= palmSunday && annunciationDefault <= easter){
-      feasts["Annunciazione (trasferita)"] = addDays(easter,8);
-    } else {
-      feasts["Annunciazione"] = annunciationDefault;
-    }
-    return feasts;
+    const list = [
+      { name: "Mercoledì delle Ceneri", date: addDays(easter, -46), cat: 'christian' },
+      { name: "Domenica delle Palme", date: addDays(easter, -7), cat: 'christian' },
+      { name: "Giovedì Santo", date: addDays(easter, -3), cat: 'christian' },
+      { name: "Venerdì Santo", date: addDays(easter, -2), cat: 'christian' },
+      { name: "Sabato Santo", date: addDays(easter, -1), cat: 'christian' },
+      { name: "Pasqua", date: easter, cat: 'holiday' },
+      { name: "Pasquetta", date: addDays(easter, 1), cat: 'holiday' },
+      { name: "Ascensione", date: addDays(easter, 39), cat: 'christian' },
+      { name: "Pentecoste", date: addDays(easter, 49), cat: 'christian' },
+      { name: "Corpus Domini", date: addDays(easter, 60), cat: 'christian' }
+    ];
+    // Annunciazione: 25 marzo, trasferita al lunedì dopo l'ottava di Pasqua se cade nella Settimana Santa
+    const ann = new Date(year, 2, 25);
+    if (ann >= addDays(easter, -7) && ann <= easter) list.push({ name: "Annunciazione (trasferita)", date: addDays(easter, 8), cat: 'christian' });
+    else list.push({ name: "Annunciazione", date: ann, cat: 'christian' });
+    moveableCache[year] = list;
+    return list;
   }
 
+  const CAT_RANK = { holiday: 3, christian: 2, pagan: 1 };
+  function getSpecial(date){
+    const key = (date.getMonth() + 1) + '-' + date.getDate();
+    const items = [];
+    if (DATA.NATIONAL[key]) items.push([DATA.NATIONAL[key], 'holiday']);
+    if (DATA.LOCAL[key]) items.push([DATA.LOCAL[key], 'holiday']);
+    if (DATA.CHRISTIAN_FIXED[key]) items.push([DATA.CHRISTIAN_FIXED[key], 'christian']);
+    for (const f of getMoveable(date.getFullYear())) if (sameDate(f.date, date)) items.push([f.name, f.cat]);
+    if (DATA.PAGAN[key]) items.push([DATA.PAGAN[key], 'pagan']);
+    if (!items.length) return null;
+    let cat = items[0][1];
+    for (const it of items) if (CAT_RANK[it[1]] > CAT_RANK[cat]) cat = it[1];
+    return { text: items.map((i) => i[0]).join(' · '), category: cat };
+  }
+
+  /* ---------- ISO week, moon ---------- */
   function isoWeekNumber(date){
     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    const dayNum = (d.getUTCDay() + 6) % 7; // Monday=0 .. Sunday=6
-    d.setUTCDate(d.getUTCDate() - dayNum + 3); // nearest Thursday
+    const dayNum = (d.getUTCDay() + 6) % 7;
+    d.setUTCDate(d.getUTCDate() - dayNum + 3);
     const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
     const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
     firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
-    const week = 1 + Math.round((d - firstThursday) / (7*86400000));
-    return { week, year: d.getUTCFullYear() };
+    return 1 + Math.round((d - firstThursday) / (7 * 86400000));
   }
 
   function moonPhaseInfo(date){
     const synodic = 29.530588853;
-    const knownNewMoon = Date.UTC(2000,0,6,18,14,0);
-    const diffDays = (date.getTime() - knownNewMoon) / 86400000;
-    let phase = (diffDays % synodic) / synodic;
+    const knownNewMoon = Date.UTC(2000, 0, 6, 18, 14, 0);
+    const noon = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
+    let phase = (((noon - knownNewMoon) / 86400000) % synodic) / synodic;
     if (phase < 0) phase += 1;
-    const illumination = Math.round((1 - Math.cos(2*Math.PI*phase))/2 * 100);
+    const illumination = Math.round((1 - Math.cos(2 * Math.PI * phase)) / 2 * 100);
     let name, emoji;
     if (phase < 0.03 || phase > 0.97){ name = "Luna nuova"; emoji = "🌑"; }
     else if (phase < 0.22){ name = "Luna crescente"; emoji = "🌒"; }
@@ -531,96 +502,508 @@
     return { name, emoji, illumination };
   }
 
-  const IFC_MONTHS = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Sol","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
-  const IFC_WEEKDAYS = ["domenica","lunedi","martedi","mercoledi","giovedi","venerdi","sabato"];
+  /* ---------- Sun (NOAA simplified) ---------- */
+  function solarDay(dayStartUtcMs, lat, lon){
+    const dt = new Date(dayStartUtcMs);
+    const y = dt.getUTCFullYear();
+    const doy = Math.round((Date.UTC(y, dt.getUTCMonth(), dt.getUTCDate()) - Date.UTC(y, 0, 1)) / 86400000) + 1;
+    const g = 2 * Math.PI / (isLeapYear(y) ? 366 : 365) * (doy - 1);
+    const eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    const latR = lat * Math.PI / 180;
+    let cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latR) * Math.cos(decl)) - Math.tan(latR) * Math.tan(decl);
+    cosH = Math.max(-1, Math.min(1, cosH));
+    const H = Math.acos(cosH) * 180 / Math.PI;
+    return {
+      sunrise: dayStartUtcMs + (720 - 4 * (lon + H) - eq) * 60000,
+      sunset: dayStartUtcMs + (720 - 4 * (lon - H) - eq) * 60000,
+      lengthSec: 8 * H * 60
+    };
+  }
+  const romeTime = new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
+  const romeParts = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Europe/Rome' });
+  function romeMinutes(ms){
+    const parts = romeParts.formatToParts(new Date(ms));
+    let h = 0, m = 0;
+    for (const p of parts){ if (p.type === 'hour') h = +p.value; if (p.type === 'minute') m = +p.value; }
+    return h * 60 + m;
+  }
 
+  /* ---------- International Fixed Calendar ---------- */
   function ifcDate(date){
     const year = date.getFullYear();
-    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
-    const startOfYear = new Date(year,0,1);
-    const doy = Math.floor((date - startOfYear)/86400000)+1;
-
-    if (!isLeap && doy === 365) return { special: "Giorno dell'Anno" };
-    if (isLeap && doy === 366) return { special: "Giorno dell'Anno" };
-    if (isLeap && doy === 169) return { special: "Giorno Bisestile" };
-
-    let idx = doy;
-    if (isLeap && doy > 169) idx = doy - 1;
-
-    const monthIdx = Math.floor((idx-1)/28);
-    const day = ((idx-1)%28)+1;
-    const week = Math.floor((day-1)/7)+1;
-    const weekday = IFC_WEEKDAYS[(day-1)%7];
-    return { month: IFC_MONTHS[monthIdx], day, week, weekday };
+    const leap = isLeapYear(year);
+    const doy = dayOfYear(date);
+    if (doy === (leap ? 366 : 365)) return { special: 'year' };
+    if (leap && doy === 169) return { special: 'leap' };
+    const idx = (leap && doy > 169) ? doy - 1 : doy;
+    const monthIdx = Math.floor((idx - 1) / 28);
+    const day = ((idx - 1) % 28) + 1;
+    return { monthIdx, month: IFC_MONTHS[monthIdx], day, week: Math.floor((day - 1) / 7) + 1, weekday: IFC_WEEKDAYS[(day - 1) % 7] };
   }
-
   function ifcToDate(year, monthIdx, day){
-    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
-    const idx = monthIdx*28 + day;
-    const doy = (isLeap && idx > 168) ? idx + 1 : idx;
-    const d = new Date(year,0,1);
-    d.setDate(d.getDate() + doy - 1);
-    return d;
+    const idx = monthIdx * 28 + day;
+    const doy = (isLeapYear(year) && idx > 168) ? idx + 1 : idx;
+    return dateFromDoy(year, doy);
   }
-
   function ifcSpecialDate(year, special){
-    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
-    const d = new Date(year,0,1);
-    if (special === 'leap') d.setDate(d.getDate() + 168);
-    else d.setDate(d.getDate() + (isLeap ? 365 : 364));
-    return d;
+    return dateFromDoy(year, special === 'leap' ? 169 : (isLeapYear(year) ? 366 : 365));
+  }
+  function ifcBlocks(year){
+    const leap = isLeapYear(year);
+    const blocks = [];
+    for (let m = 0; m < 13; m++){
+      const start = m * 28 + 1 + ((leap && m >= 6) ? 1 : 0);
+      blocks.push({ label: IFC_SHORT[m], start, len: 28, extra: false });
+      if (leap && m === 5) blocks.push({ label: '', start: 169, len: 1, extra: true, title: SPECIAL_LABEL.leap });
+    }
+    blocks.push({ label: '', start: leap ? 366 : 365, len: 1, extra: true, title: SPECIAL_LABEL.year });
+    return blocks;
   }
 
-  let viewedDate = new Date();
+  /* ---------- Other calendars ---------- */
+  const EQ_TERMS = [[485,324.96,1934.136],[203,337.23,32964.467],[199,342.08,20.186],[182,27.85,445267.112],[156,73.14,45036.886],[136,171.52,22518.443],[77,222.54,65928.934],[74,296.72,3034.906],[70,243.58,9037.513],[58,119.81,33718.147],[52,297.17,150.678],[50,21.02,2281.226],[45,247.54,29929.562],[44,325.15,31555.956],[29,60.93,4443.417],[18,155.12,67555.328],[17,288.79,4562.452],[16,198.04,62894.029],[14,199.76,31436.921],[12,95.39,14577.848],[12,287.11,31931.756],[12,320.81,34777.259],[9,227.73,1222.114],[8,15.45,16859.074]];
+  function septEquinoxUtcMs(year){
+    if (year < 1000 || year > 3000) return Date.UTC(year, 8, 22, 12, 0, 0) + (year % 4) * 6 * 3600000;
+    const Y = (year - 2000) / 1000;
+    const jde0 = 2451810.21715 + 365242.01767 * Y - 0.11575 * Y * Y + 0.00337 * Y * Y * Y + 0.00078 * Y * Y * Y * Y;
+    const T = (jde0 - 2451545.0) / 36525;
+    const W = (35999.373 * T - 2.47) * Math.PI / 180;
+    const dl = 1 + 0.0334 * Math.cos(W) + 0.0007 * Math.cos(2 * W);
+    let S = 0;
+    for (const t of EQ_TERMS) S += t[0] * Math.cos((t[1] + t[2] * T) * Math.PI / 180);
+    const jde = jde0 + 0.00001 * S / dl;
+    const dT = year >= 1990 ? 67 : (year >= 1900 ? 5 : 12);
+    return (jde - 2440587.5) * 86400000 - dT * 1000;
+  }
+  function republicanYearStart(gy){
+    const d = new Date(septEquinoxUtcMs(gy) + (9 * 60 + 21) * 1000); // ora media di Parigi
+    return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+  }
+  function republicanDate(date){
+    const gy = date.getFullYear();
+    const dd = new Date(gy, date.getMonth(), date.getDate());
+    const startThis = republicanYearStart(gy);
+    let ry, start;
+    if (dd >= startThis){ ry = gy - 1791; start = startThis; }
+    else { ry = gy - 1792; start = republicanYearStart(gy - 1); }
+    const n = Math.round((dd - start) / 86400000);
+    if (n < 360) return { year: ry, month: Math.floor(n / 30) + 1, day: n % 30 + 1 };
+    return { year: ry, comp: n - 360 };
+  }
+  function romanNumeral(n){
+    if (n < 1) return String(n);
+    const map = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+    let s = '';
+    for (const [v, r] of map){ while (n >= v){ s += r; n -= v; } }
+    return s;
+  }
+  const REP_MONTHS = [["Vendémiaire","mese delle vendemmie"],["Brumaire","mese delle nebbie"],["Frimaire","mese delle brine"],["Nivôse","mese delle nevi"],["Pluviôse","mese delle piogge"],["Ventôse","mese dei venti"],["Germinal","mese della germinazione"],["Floréal","mese dei fiori"],["Prairial","mese dei prati"],["Messidor","mese delle mietiture"],["Thermidor","mese del caldo"],["Fructidor","mese dei frutti"]];
+  const REP_DECADE = ["Primidi","Duodi","Tridi","Quartidi","Quintidi","Sextidi","Septidi","Octidi","Nonidi","Décadi"];
+  const REP_COMP = [["Jour de la Vertu","giorno della Virtù"],["Jour du Génie","giorno del Genio"],["Jour du Travail","giorno del Lavoro"],["Jour de l’Opinion","giorno dell’Opinione"],["Jour des Récompenses","giorno delle Ricompense"],["Jour de la Révolution","giorno della Rivoluzione"]];
 
+  function positivistDate(date){
+    const y = date.getFullYear();
+    const doy = dayOfYear(date);
+    const year = y - 1788;
+    if (doy === 365) return { year, special: 'dead' };
+    if (isLeapYear(y) && doy === 366) return { year, special: 'women' };
+    return { year, month: Math.floor((doy - 1) / 28) + 1, day: (doy - 1) % 28 + 1 };
+  }
+  const POS_MONTHS = [["Mosè","teocrazia primitiva"],["Omero","poesia antica"],["Aristotele","filosofia antica"],["Archimede","scienza antica"],["Cesare","civiltà militare"],["San Paolo","cattolicesimo"],["Carlomagno","civiltà feudale"],["Dante","epica moderna"],["Gutenberg","industria moderna"],["Shakespeare","dramma moderno"],["Cartesio","filosofia moderna"],["Federico","politica moderna"],["Bichat","scienza moderna"]];
+  const POS_WEEKDAYS = ["lunedì","martedì","mercoledì","giovedì","venerdì","sabato","domenica"];
+
+  function jdnGregorian(y, m, d){
+    const a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12 * a - 3;
+    return d + Math.floor((153 * mm + 2) / 5) + 365 * yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) - 32045;
+  }
+  function julianFromJDN(j){
+    const c = j + 32082, d = Math.floor((4 * c + 3) / 1461), e = c - Math.floor(1461 * d / 4), m = Math.floor((5 * e + 2) / 153);
+    return { day: e - Math.floor((153 * m + 2) / 5) + 1, month: m + 3 - 12 * Math.floor(m / 10), year: d - 4800 + Math.floor(m / 10) };
+  }
+  const MONTH_LOWER = DATA.MONTH_NAMES.map((s) => s.toLowerCase());
+
+  /* ---------- Notes: browser storage + private per-person db ---------- */
+  const NOTES_LS_KEY = 'holocene-notes-v1';
+  let notes = {};
+  try { notes = JSON.parse(localStorage.getItem(NOTES_LS_KEY) || '{}') || {}; } catch (e) { notes = {}; }
+  let localOk = true;
+  let dbCtx = null;
+  const loadedYears = new Set(), writing = {}, pending = {}, timers = {};
+  let noteStatus = 'local';
+  let currentNoteKey = null;
+
+  function saveLocal(){
+    try { localStorage.setItem(NOTES_LS_KEY, JSON.stringify(notes)); localOk = true; }
+    catch (e) { localOk = false; }
+  }
+  const hasNote = (key) => !!(notes[key] && typeof notes[key].x === 'string' && notes[key].x.trim());
+  const noteText = (key) => (notes[key] && typeof notes[key].x === 'string') ? notes[key].x : '';
+
+  function setNoteStatus(s){ noteStatus = s; paintNoteStatus(); }
+  function paintNoteStatus(){
+    const box = el('noteStatus');
+    const total = Object.keys(notes).filter(hasNote).length;
+    el('noteCount').textContent = total ? (total + (total === 1 ? ' nota in totale' : ' note in totale')) : '';
+    box.classList.remove('error');
+    if (noteStatus === 'syncing') box.textContent = 'Salvataggio in corso…';
+    else if (noteStatus === 'synced') box.textContent = 'Salvata anche nel tuo spazio privato di questa pagina: la ritrovi sugli altri dispositivi dove accedi a Claude.';
+    else if (noteStatus === 'error'){ box.classList.add('error'); box.textContent = 'Sincronizzazione non riuscita: la nota resta su questo browser.'; }
+    else box.textContent = localOk ? 'Salvata solo su questo browser (non si sincronizza tra dispositivi).' : 'Impossibile salvare: l’archiviazione del browser non è disponibile.';
+  }
+
+  async function pushYear(y){
+    if (!dbCtx) return;
+    if (writing[y]){ pending[y] = true; return; }
+    writing[y] = true;
+    try {
+      do {
+        pending[y] = false;
+        const map = {};
+        const prefix = y + '-';
+        for (const k in notes) if (k.startsWith(prefix)) map[k] = notes[k];
+        await dbCtx.db.collection('data/users/' + dbCtx.id).doc('notes-' + y).set({ notes: map });
+      } while (pending[y]);
+      setNoteStatus('synced');
+    } catch (e) {
+      setNoteStatus('error');
+    } finally {
+      writing[y] = false;
+    }
+  }
+  function scheduleRemote(y){
+    if (!dbCtx){ setNoteStatus('local'); return; }
+    setNoteStatus('syncing');
+    clearTimeout(timers[y]);
+    timers[y] = setTimeout(() => pushYear(y), 900);
+  }
+
+  async function loadYear(y){
+    if (!dbCtx || loadedYears.has(y)) return;
+    loadedYears.add(y);
+    try {
+      const snap = await dbCtx.db.collection('data/users/' + dbCtx.id).doc('notes-' + y).get();
+      const remote = (snap.exists && snap.data() && snap.data().notes) ? snap.data().notes : {};
+      for (const k in remote){
+        const r = remote[k];
+        if (!r || typeof r.x !== 'string') continue;
+        if (!notes[k] || (r.t || 0) > (notes[k].t || 0)) notes[k] = r;
+      }
+      let needPush = false;
+      const prefix = y + '-';
+      for (const k in notes) if (k.startsWith(prefix)){ const r = remote[k]; if (!r || (notes[k].t || 0) > (r.t || 0)) needPush = true; }
+      saveLocal();
+      refreshNoteField();
+      refreshDots();
+      if (needPush) scheduleRemote(y); else setNoteStatus('synced');
+    } catch (e) {
+      setNoteStatus('error');
+    }
+  }
+
+  async function initDb(){
+    try {
+      if (!window.claude || !window.claude.use) return;
+      const db = await window.claude.use('db');
+      const user = await window.claude.use('user');
+      if (!db || !user) return;
+      const id = await user.id();
+      if (!id) return;
+      dbCtx = { db, id };
+      setNoteStatus('syncing');
+      await loadYear(viewedDate.getFullYear());
+    } catch (e) { /* resta il salvataggio locale */ }
+  }
+
+  function refreshNoteField(){
+    const field = el('noteInput');
+    if (document.activeElement === field) return;
+    if (currentNoteKey) field.value = noteText(currentNoteKey);
+  }
+  function refreshDots(){
+    document.querySelectorAll('[data-key]').forEach((b) => b.classList.toggle('has-note', hasNote(b.dataset.key)));
+  }
+
+  /* ---------- state ---------- */
+  let viewedDate = new Date();
+  let stripYear = null;
+  let stripN = 365;
+
+  /* ---------- mini calendars ---------- */
   function buildGregMiniCal(container, year, monthIdx, viewed, realToday){
-    const daysInMonth = new Date(year, monthIdx+1, 0).getDate();
+    const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
     const startOffset = (new Date(year, monthIdx, 1).getDay() + 6) % 7;
     let html = '';
     for (let i = 0; i < startOffset; i++) html += '<span class="mini-empty"></span>';
     for (let d = 1; d <= daysInMonth; d++){
       const bd = new Date(year, monthIdx, d);
       const cls = ['mini-day'];
+      const key = dayKey(year, monthIdx, d);
       if (sameDate(bd, viewed)) cls.push('selected');
       if (sameDate(bd, realToday)) cls.push('is-today');
-      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="greg" data-y="'+year+'" data-m="'+monthIdx+'" data-d="'+d+'">'+d+'</button>';
+      if (hasNote(key)) cls.push('has-note');
+      html += '<button type="button" class="' + cls.join(' ') + '" data-kind="greg" data-key="' + key + '" data-y="' + year + '" data-m="' + monthIdx + '" data-d="' + d + '">' + d + '</button>';
     }
     container.innerHTML = html;
   }
 
   function buildIfcMiniCal(container, year, monthIdx, viewed, realToday){
-    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
+    const leap = isLeapYear(year);
     const iv = ifcDate(viewed), it = ifcDate(realToday);
     let html = '';
     for (let d = 1; d <= 28; d++){
       const cls = ['mini-day'];
-      if (!iv.special && iv.month === IFC_MONTHS[monthIdx] && iv.day === d && viewed.getFullYear() === year) cls.push('selected');
-      if (!it.special && it.month === IFC_MONTHS[monthIdx] && it.day === d && realToday.getFullYear() === year) cls.push('is-today');
-      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="ifc" data-y="'+year+'" data-m="'+monthIdx+'" data-d="'+d+'">'+d+'</button>';
+      const key = dateKey(ifcToDate(year, monthIdx, d));
+      if (!iv.special && iv.monthIdx === monthIdx && iv.day === d && viewed.getFullYear() === year) cls.push('selected');
+      if (!it.special && it.monthIdx === monthIdx && it.day === d && realToday.getFullYear() === year) cls.push('is-today');
+      if (hasNote(key)) cls.push('has-note');
+      html += '<button type="button" class="' + cls.join(' ') + '" data-kind="ifc" data-key="' + key + '" data-y="' + year + '" data-m="' + monthIdx + '" data-d="' + d + '">' + d + '</button>';
     }
-    if (monthIdx === 5 && isLeap){
+    const extras = [];
+    if (monthIdx === 5 && leap) extras.push('leap');
+    if (monthIdx === 12) extras.push('year');
+    for (const sp of extras){
       const cls = ['mini-special'];
-      if (iv.special === "Giorno Bisestile" && viewed.getFullYear() === year) cls.push('selected');
-      if (it.special === "Giorno Bisestile" && realToday.getFullYear() === year) cls.push('is-today');
-      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="ifc-special" data-special="leap" data-y="'+year+'">Giorno Bisestile</button>';
-    }
-    if (monthIdx === 12){
-      const cls = ['mini-special'];
-      if (iv.special === "Giorno dell'Anno" && viewed.getFullYear() === year) cls.push('selected');
-      if (it.special === "Giorno dell'Anno" && realToday.getFullYear() === year) cls.push('is-today');
-      html += '<button type="button" class="'+cls.join(' ')+'" data-kind="ifc-special" data-special="year" data-y="'+year+'">Giorno dell\'Anno</button>';
+      const key = dateKey(ifcSpecialDate(year, sp));
+      if (iv.special === sp && viewed.getFullYear() === year) cls.push('selected');
+      if (it.special === sp && realToday.getFullYear() === year) cls.push('is-today');
+      if (hasNote(key)) cls.push('has-note');
+      html += '<button type="button" class="' + cls.join(' ') + '" data-kind="ifc-special" data-special="' + sp + '" data-key="' + key + '" data-y="' + year + '">' + SPECIAL_LABEL[sp] + '</button>';
     }
     container.innerHTML = html;
   }
 
-  document.getElementById('gregMiniCal').addEventListener('click', (e) => {
+  /* ---------- year strip ---------- */
+  function buildStrip(year){
+    stripYear = year;
+    stripN = isLeapYear(year) ? 366 : 365;
+    const strip = el('strip');
+    strip.style.gridTemplateColumns = 'repeat(' + stripN + ', 1fr)';
+    let cells = '';
+    for (let doy = 1; doy <= stripN; doy++){
+      const dt = dateFromDoy(year, doy);
+      const sp = getSpecial(dt);
+      let cls = 'sc';
+      if (sp) cls += sp.category === 'holiday' ? ' nat' : (sp.category === 'christian' ? ' chr' : ' pag');
+      const title = dt.getDate() + ' ' + MONTH_LOWER[dt.getMonth()] + (sp ? ' — ' + sp.text : '');
+      cells += '<div class="' + cls + '" title="' + title.replace(/"/g, '&quot;') + '"></div>';
+    }
+    strip.innerHTML = cells;
+
+    let g = '';
+    let start = 1;
+    for (let m = 0; m < 12; m++){
+      const len = new Date(year, m + 1, 0).getDate();
+      g += '<button type="button" class="blk" data-doy="' + start + '" data-start="' + start + '" data-len="' + len + '" style="flex-grow:' + len + '" title="' + MONTH_LOWER[m] + '">' + SHORT_MONTHS[m] + '</button>';
+      start += len;
+    }
+    el('blocksGreg').innerHTML = g;
+
+    let f = '';
+    for (const b of ifcBlocks(year)){
+      f += '<button type="button" class="blk' + (b.extra ? ' extra' : '') + '" data-doy="' + b.start + '" data-start="' + b.start + '" data-len="' + b.len + '" style="flex-grow:' + b.len + '"' + (b.title ? ' title="' + b.title + '"' : '') + '>' + b.label + '</button>';
+    }
+    el('blocksIfc').innerHTML = f;
+  }
+
+  function updateStrip(now, realToday){
+    const year = now.getFullYear();
+    if (stripYear !== year) buildStrip(year);
+    const doy = dayOfYear(now);
+    el('markerSel').style.left = ((doy - 0.5) / stripN * 100) + '%';
+    const tm = el('markerToday');
+    if (realToday.getFullYear() === year){ tm.style.display = 'block'; tm.style.left = ((dayOfYear(realToday) - 0.5) / stripN * 100) + '%'; }
+    else tm.style.display = 'none';
+    document.querySelectorAll('.blk').forEach((b) => {
+      const s = +b.dataset.start, l = +b.dataset.len;
+      b.classList.toggle('cur', doy >= s && doy < s + l);
+    });
+    el('stripCaption').textContent = 'Giorno ' + doy + ' di ' + stripN + ' (' + (doy / stripN * 100).toFixed(1).replace('.', ',') + '%)';
+  }
+
+  /* ---------- deep time ---------- */
+  const DEEP_KEYS = Object.keys(DEEP).map((k) => {
+    const p = k.split('-').map(Number);
+    return { k, m: p[0], d: p[1], ord: Math.round((Date.UTC(2001, p[0] - 1, p[1]) - Date.UTC(2001, 0, 1)) / 86400000) };
+  });
+  function makeEvent(ev, viewYear){
+    const y = ev[0];
+    const he = y > 0 ? y + 10000 : 10001 + y;
+    const era = y > 0 ? y + ' d.C.' : (-y) + ' a.C.';
+    const ago = y > 0 ? viewYear - y : viewYear + (-y) - 1;
+    const agoText = ago > 0 ? fmtNum(ago) + (ago === 1 ? ' anno fa' : ' anni fa') : (ago === 0 ? 'quest’anno' : 'tra ' + fmtNum(-ago) + ' anni');
+    const box = document.createElement('div');
+    box.className = 'ev';
+    const meta = document.createElement('div');
+    meta.className = 'ev-meta';
+    meta.textContent = fmtNum(he) + ' HE · ' + era + ' · ' + agoText;
+    const text = document.createElement('div');
+    text.className = 'ev-text';
+    text.textContent = ev[1];
+    box.appendChild(meta);
+    box.appendChild(text);
+    return box;
+  }
+  function renderDeep(now){
+    const list = el('deepList');
+    const note = el('deepNote');
+    list.innerHTML = '';
+    const m = now.getMonth() + 1, d = now.getDate(), key = m + '-' + d;
+    const viewYear = now.getFullYear();
+    if (DEEP[key] && DEEP[key].length){
+      note.style.display = 'none';
+      DEEP[key].slice(0, 3).forEach((ev) => list.appendChild(makeEvent(ev, viewYear)));
+      return;
+    }
+    const ord = Math.round((Date.UTC(2001, m - 1, d) - Date.UTC(2001, 0, 1)) / 86400000);
+    let best = null;
+    for (const e of DEEP_KEYS){
+      let diff = e.ord - ord;
+      if (diff > 182) diff -= 365;
+      if (diff < -182) diff += 365;
+      const ad = Math.abs(diff);
+      if (!best || ad < best.ad || (ad === best.ad && diff > best.diff)) best = { e, diff, ad };
+    }
+    if (!best) return;
+    const when = best.diff > 0 ? 'tra ' + best.diff + (best.diff === 1 ? ' giorno' : ' giorni') : (-best.diff) + (best.diff === -1 ? ' giorno fa' : ' giorni fa');
+    note.style.display = 'block';
+    note.textContent = 'Nessun evento schedato per questo giorno. Il più vicino cade il ' + best.e.d + ' ' + MONTH_LOWER[best.e.m - 1] + ' (' + when + '):';
+    DEEP[best.e.k].slice(0, 2).forEach((ev) => list.appendChild(makeEvent(ev, viewYear)));
+  }
+
+  /* ---------- render ---------- */
+  function render(){
+    const now = viewedDate;
+    const realToday = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const key = month + '-' + day;
+    const nkey = dateKey(now);
+    const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+
+    el('weekday').textContent = WEEKDAY_NAMES[now.getDay()];
+    el('dayNum').textContent = day;
+    el('monthName').textContent = DATA.MONTH_NAMES[month - 1];
+    el('heYear').textContent = fmtNum(year + 10000) + ' HE';
+    el('todayBtn').classList.toggle('visible', !sameDate(now, realToday));
+
+    // festività
+    const sp = getSpecial(now);
+    const spCard = el('specialCard');
+    if (sp){
+      spCard.style.display = 'block';
+      spCard.classList.remove('holiday', 'christian', 'pagan');
+      spCard.classList.add(sp.category);
+      el('specialLabel').textContent = sp.category === 'holiday' ? 'Festività di oggi' : (sp.category === 'christian' ? 'Ricorrenza cristiana' : 'Festa pagana / stagionale');
+      el('specialValue').textContent = sp.text;
+    } else spCard.style.display = 'none';
+
+    const saint = DATA.SAINTS[key];
+    el('saintCard').style.display = saint ? 'block' : 'none';
+    if (saint) el('saintValue').textContent = saint;
+
+    // note
+    if (currentNoteKey !== nkey || document.activeElement !== el('noteInput')){
+      currentNoteKey = nkey;
+      el('noteInput').value = noteText(nkey);
+    }
+    if (dbCtx) loadYear(year);
+    paintNoteStatus();
+
+    // settimana e luna
+    const wk = isoWeekNumber(now);
+    el('weekValue').textContent = 'n. ' + wk;
+    const moon = moonPhaseInfo(now);
+    el('moonEmoji').textContent = moon.emoji;
+    el('moonValue').textContent = moon.name + ' (' + moon.illumination + '%)';
+
+    // luce
+    const dayStart = Date.UTC(year, now.getMonth(), day);
+    const s = solarDay(dayStart, MILAN.lat, MILAN.lon);
+    const p = solarDay(dayStart - 86400000, MILAN.lat, MILAN.lon);
+    el('sunrise').textContent = romeTime.format(new Date(s.sunrise));
+    el('sunset').textContent = romeTime.format(new Date(s.sunset));
+    const lh = Math.floor(s.lengthSec / 3600), lm = Math.round((s.lengthSec % 3600) / 60);
+    el('dayLength').textContent = (lm === 60 ? lh + 1 : lh) + ' h ' + pad2(lm === 60 ? 0 : lm) + ' min';
+    const delta = Math.round(s.lengthSec - p.lengthSec);
+    let deltaText;
+    if (Math.abs(delta) < 1) deltaText = 'durata invariata rispetto a ieri';
+    else {
+      const a = Math.abs(delta), mm = Math.floor(a / 60), ss = a % 60;
+      deltaText = (delta > 0 ? '+' : '−') + (mm ? mm + ' min ' : '') + ss + ' s di luce rispetto a ieri';
+    }
+    el('sunCaption').textContent = deltaText;
+    const f1 = romeMinutes(s.sunrise) / 1440, f2 = romeMinutes(s.sunset) / 1440;
+    el('sunFill').style.left = (f1 * 100) + '%';
+    el('sunFill').style.width = (Math.max(0, f2 - f1) * 100) + '%';
+
+    renderDeep(now);
+
+    el('monthPhraseLabel').textContent = 'Curiosità di ' + MONTH_LOWER[month - 1] + ' (era umana)';
+    el('monthPhrase').textContent = DATA.HUMAN_ERA_PHRASES[month - 1];
+
+    updateStrip(now, realToday);
+
+    // confronto gregoriano / fisso
+    el('gregCompareDate').textContent = cap(WEEKDAY_NAMES[now.getDay()]) + ' ' + day + ' ' + DATA.MONTH_NAMES[month - 1] + '\nsettimana ISO ' + wk;
+    const ifc = ifcDate(now);
+    let ifcMonthIdx;
+    if (ifc.special){
+      ifcMonthIdx = ifc.special === 'leap' ? 5 : 12;
+      el('ifcCompareDate').textContent = SPECIAL_LABEL[ifc.special] + '\nfuori settimana';
+    } else {
+      ifcMonthIdx = ifc.monthIdx;
+      el('ifcCompareDate').textContent = ifc.month + ' ' + ifc.day + '\n' + ifc.weekday + ', settimana ' + ifc.week + ' di 4';
+    }
+    buildGregMiniCal(el('gregMiniCal'), year, month - 1, now, realToday);
+    buildIfcMiniCal(el('ifcMiniCal'), year, ifcMonthIdx, now, realToday);
+
+    // altri calendari
+    const rep = republicanDate(now);
+    if (rep.comp !== undefined){
+      el('repMain').textContent = REP_COMP[rep.comp][0];
+      el('repSub').textContent = REP_COMP[rep.comp][1] + ' · Anno ' + romanNumeral(rep.year) + (rep.year < 1 ? ' (prima dell’Anno I)' : '');
+    } else {
+      el('repMain').textContent = rep.day + ' ' + REP_MONTHS[rep.month - 1][0];
+      el('repSub').textContent = REP_DECADE[(rep.day - 1) % 10] + ' · ' + REP_MONTHS[rep.month - 1][1] + ' · Anno ' + romanNumeral(rep.year) + (rep.year < 1 ? ' (prima dell’Anno I)' : '');
+    }
+    const pos = positivistDate(now);
+    if (pos.special){
+      el('posMain').textContent = pos.special === 'dead' ? 'Festa dei Morti' : 'Festa delle Sante Donne';
+      el('posSub').textContent = 'giorno fuori mese · anno ' + pos.year + ' della Grande Crisi';
+    } else {
+      el('posMain').textContent = POS_MONTHS[pos.month - 1][0] + ' ' + pos.day;
+      el('posSub').textContent = POS_WEEKDAYS[(pos.day - 1) % 7] + ' · ' + POS_MONTHS[pos.month - 1][1] + ' · anno ' + pos.year + ' della Grande Crisi';
+    }
+    const jdn = jdnGregorian(year, month, day);
+    const jul = julianFromJDN(jdn);
+    el('jdnMain').textContent = 'JDN ' + fmtNum(jdn);
+    el('jdnSub').textContent = 'Calendario giuliano: ' + jul.day + ' ' + MONTH_LOWER[jul.month - 1] + ' ' + jul.year + ' · MJD ' + fmtNum(jdn - 2400001);
+  }
+
+  /* ---------- events ---------- */
+  function goToDay(offset){ viewedDate = addDays(viewedDate, offset); render(); }
+  el('prevDay').addEventListener('click', () => goToDay(-1));
+  el('nextDay').addEventListener('click', () => goToDay(1));
+  el('todayBtn').addEventListener('click', () => { viewedDate = new Date(); render(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target;
+    if (t && (t.tagName === 'TEXTAREA' || t.tagName === 'INPUT' || t.isContentEditable)) return;
+    if (e.key === 'ArrowLeft') goToDay(-1);
+    else if (e.key === 'ArrowRight') goToDay(1);
+    else if (e.key === 't' || e.key === 'T'){ viewedDate = new Date(); render(); }
+  });
+
+  el('gregMiniCal').addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-kind="greg"]');
     if (!btn) return;
     viewedDate = new Date(+btn.dataset.y, +btn.dataset.m, +btn.dataset.d);
     render();
   });
-
-  document.getElementById('ifcMiniCal').addEventListener('click', (e) => {
+  el('ifcMiniCal').addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-kind]');
     if (!btn) return;
     if (btn.dataset.kind === 'ifc') viewedDate = ifcToDate(+btn.dataset.y, +btn.dataset.m, +btn.dataset.d);
@@ -628,151 +1011,53 @@
     render();
   });
 
-  function startOfDay(d){
-    const c = new Date(d);
-    c.setHours(0,0,0,0);
-    return c;
-  }
-
-  function render(){
-    const now = viewedDate;
-    const realToday = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth()+1; // 1-12
-    const day = now.getDate();
-    const key = month+"-"+day;
-    const heYear = (year+10000).toLocaleString('it-IT');
-
-    document.getElementById('weekday').textContent = WEEKDAY_NAMES[now.getDay()];
-    document.getElementById('dayNum').textContent = day;
-    document.getElementById('monthName').textContent = DATA.MONTH_NAMES[month-1];
-    document.getElementById('heYear').textContent = heYear + " HE";
-
-    const todayBtn = document.getElementById('todayBtn');
-    todayBtn.classList.toggle('visible', !sameDate(now, realToday));
-
-    const iso = isoWeekNumber(now);
-    document.getElementById('weekValue').textContent = "n. " + iso.week;
-
-    const moon = moonPhaseInfo(now);
-    document.getElementById('moonEmoji').textContent = moon.emoji;
-    document.getElementById('moonValue').textContent = moon.name + " (" + moon.illumination + "%)";
-
-    const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
-    document.getElementById('gregCompareDate').textContent =
-      cap(WEEKDAY_NAMES[now.getDay()]) + " " + day + " " + DATA.MONTH_NAMES[month-1] + "\n" +
-      "settimana ISO " + iso.week;
-
-    const ifc = ifcDate(now);
-    let ifcMonthIdx;
-    if (ifc.special){
-      ifcMonthIdx = (ifc.special === "Giorno Bisestile") ? 5 : 12;
-      document.getElementById('ifcCompareDate').textContent = ifc.special + "\nfuori settimana";
-    } else {
-      ifcMonthIdx = IFC_MONTHS.indexOf(ifc.month);
-      document.getElementById('ifcCompareDate').textContent =
-        ifc.month + " " + ifc.day + "\n" + ifc.weekday + ", settimana " + ifc.week + " di 4";
-    }
-
-    buildGregMiniCal(document.getElementById('gregMiniCal'), year, month-1, now, realToday);
-    buildIfcMiniCal(document.getElementById('ifcMiniCal'), year, ifcMonthIdx, now, realToday);
-
-    // resolve special day: national > local > christian fixed > christian moveable > pagan
-    let specialText = null, specialCategory = null;
-    if (DATA.NATIONAL[key]){ specialText = DATA.NATIONAL[key]; specialCategory = 'holiday'; }
-    else if (DATA.LOCAL[key]){ specialText = DATA.LOCAL[key]; specialCategory = 'holiday'; }
-    else if (DATA.CHRISTIAN_FIXED[key]){ specialText = DATA.CHRISTIAN_FIXED[key]; specialCategory = 'christian'; }
-
-    const moveable = buildMoveableFeasts(year);
-    for (const [name, date] of Object.entries(moveable)){
-      if (sameDate(date, now)){
-        if (!specialText){ specialText = name; specialCategory = 'christian'; }
-        else { specialText += " . " + name; }
-      }
-    }
-
-    if (DATA.PAGAN[key]){
-      if (!specialText){ specialText = DATA.PAGAN[key]; specialCategory = 'pagan'; }
-      else { specialText += " . " + DATA.PAGAN[key]; }
-    }
-
-    const specialCard = document.getElementById('specialCard');
-    if (specialText){
-      specialCard.style.display = 'block';
-      specialCard.classList.remove('holiday','christian','pagan');
-      specialCard.classList.add(specialCategory);
-      document.getElementById('specialLabel').textContent =
-        specialCategory === 'holiday' ? 'Festivita di oggi' :
-        specialCategory === 'christian' ? 'Ricorrenza cristiana' : 'Festivita pagana / stagionale';
-      document.getElementById('specialValue').textContent = specialText;
-    } else {
-      specialCard.style.display = 'none';
-    }
-
-    const saint = DATA.SAINTS[key];
-    const saintCard = document.getElementById('saintCard');
-    if (saint){
-      saintCard.style.display = 'block';
-      document.getElementById('saintValue').textContent = saint;
-    } else {
-      saintCard.style.display = 'none';
-    }
-
-    document.getElementById('monthPhraseLabel').textContent =
-      "Curiosita di " + DATA.MONTH_NAMES[month-1].toLowerCase() + " (era umana)";
-    document.getElementById('monthPhrase').textContent = DATA.HUMAN_ERA_PHRASES[month-1];
-
-    const startOfYear = new Date(year,0,1);
-    const dayOfYear = Math.floor((now - startOfYear)/86400000)+1;
-    const isLeap = (year%4===0 && year%100!==0) || year%400===0;
-    const totalDays = isLeap ? 366 : 365;
-    const pct = (dayOfYear/totalDays*100).toFixed(1);
-    document.getElementById('yearProgress').style.width = pct + "%";
-    document.getElementById('yearCaption').textContent =
-      "Giorno " + dayOfYear + " di " + totalDays + " (" + pct + "%)";
-  }
-
-  function goToDay(offset){
-    const d = new Date(viewedDate);
-    d.setDate(d.getDate()+offset);
-    viewedDate = d;
+  function jumpDoy(doy){
+    doy = Math.max(1, Math.min(stripN, doy));
+    if (doy === dayOfYear(viewedDate) && viewedDate.getFullYear() === stripYear) return;
+    viewedDate = dateFromDoy(stripYear, doy);
     render();
   }
-
-  document.getElementById('prevDay').addEventListener('click', () => goToDay(-1));
-  document.getElementById('nextDay').addEventListener('click', () => goToDay(1));
-  document.getElementById('todayBtn').addEventListener('click', () => {
-    viewedDate = new Date();
-    render();
+  const stripEl = el('strip');
+  let dragging = false;
+  function doyFromEvent(e){
+    const r = stripEl.getBoundingClientRect();
+    const x = Math.min(Math.max(e.clientX - r.left, 0), r.width - 0.01);
+    return Math.floor(x / r.width * stripN) + 1;
+  }
+  stripEl.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    try { stripEl.setPointerCapture(e.pointerId); } catch (err) {}
+    jumpDoy(doyFromEvent(e));
+  });
+  stripEl.addEventListener('pointermove', (e) => { if (dragging) jumpDoy(doyFromEvent(e)); });
+  const endDrag = () => { dragging = false; };
+  stripEl.addEventListener('pointerup', endDrag);
+  stripEl.addEventListener('pointercancel', endDrag);
+  document.querySelector('.strip-section').addEventListener('click', (e) => {
+    const b = e.target.closest('.blk');
+    if (b) jumpDoy(+b.dataset.doy);
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') goToDay(-1);
-    if (e.key === 'ArrowRight') goToDay(1);
-    if (e.key === 't' || e.key === 'T'){ viewedDate = new Date(); render(); }
+  el('noteInput').addEventListener('input', () => {
+    const key = currentNoteKey;
+    if (!key) return;
+    notes[key] = { x: el('noteInput').value, t: Date.now() };
+    saveLocal();
+    refreshDots();
+    if (dbCtx) scheduleRemote(+key.slice(0, 4));
+    else setNoteStatus('local');
   });
 
-  // ---- theme toggle (persisted per-viewer via localStorage) ----
-  function getStoredTheme(){
-    try { return localStorage.getItem('holocene-theme'); }
-    catch (e) { return null; }
-  }
-  function setStoredTheme(value){
-    try { localStorage.setItem('holocene-theme', value); }
-    catch (e) { /* storage unavailable; theme just won't persist */ }
-  }
+  /* ---------- theme ---------- */
+  function getStoredTheme(){ try { return localStorage.getItem('holocene-theme'); } catch (e) { return null; } }
+  function setStoredTheme(v){ try { localStorage.setItem('holocene-theme', v); } catch (e) {} }
   function applyTheme(theme){
-    if (theme === 'dark' || theme === 'light'){
-      document.documentElement.setAttribute('data-theme', theme);
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
+    if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme);
+    else document.documentElement.removeAttribute('data-theme');
   }
-  const stored = getStoredTheme();
-  applyTheme(stored);
-
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(getStoredTheme());
+  el('themeToggle').addEventListener('click', () => {
+    const prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
     const current = document.documentElement.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
     const next = current === 'dark' ? 'light' : 'dark';
     applyTheme(next);
@@ -780,6 +1065,7 @@
   });
 
   render();
+  initDb();
 </script>
 </body>
 </html>
